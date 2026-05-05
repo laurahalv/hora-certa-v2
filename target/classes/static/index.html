@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hora Certa - Gestão de Clínicas e Medicamentos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>⏰ Hora Certa</h1>
+        <p>Gestão Integrada de Clínicas e Prescrições</p>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab-button active" data-tab="clinicas">Clínicas</button>
+        <button class="tab-button" data-tab="medicos">Médicos</button>
+        <button class="tab-button" data-tab="pacientes">Pacientes</button>
+        <button class="tab-button" data-tab="remedios">Remédios</button>
+        <button class="tab-button" data-tab="prescricoes">Prescrições</button>
+        <button class="tab-button" data-tab="consumo">Consumo</button>
+      </nav>
+
+      <!-- CLÍNICAS -->
+      <section id="clinicas" class="tab-content active">
+        <h2>Clínicas</h2>
+        <form id="formClinica" class="form-container">
+          <input type="hidden" id="clinicaId" />
+          <input
+            type="text"
+            id="clinicaNome"
+            placeholder="Nome da Clínica"
+            required
+          />
+          <input
+            type="text"
+            id="clinicaEndereco"
+            placeholder="Endereço"
+            required
+          />
+          <input
+            type="tel"
+            id="clinicaTelefone"
+            placeholder="Telefone"
+            required
+          />
+          <input type="email" id="clinicaEmail" placeholder="Email" required />
+          <button type="submit" class="btn btn-primary">
+            Adicionar Clínica
+          </button>
+        </form>
+        <div id="listaClinicas" class="list-container"></div>
+      </section>
+
+      <!-- MÉDICOS -->
+      <section id="medicos" class="tab-content">
+        <h2>Médicos</h2>
+        <form id="formMedico" class="form-container">
+          <input type="hidden" id="medicoId" />
+          <input
+            type="text"
+            id="medicoNome"
+            placeholder="Nome do Médico"
+            required
+          />
+          <input type="email" id="medicoEmail" placeholder="Email" required />
+          <select id="medicoEspecialidade" required>
+            <option value="">Selecione Especialidade</option>
+            <option value="CARDIOLOGIA">Cardiologia</option>
+            <option value="DERMATOLOGIA">Dermatologia</option>
+            <option value="NEUROLOGIA">Neurologia</option>
+            <option value="ORTOPEDIA">Ortopedia</option>
+            <option value="PEDIATRIA">Pediatria</option>
+            <option value="PSIQUIATRIA">Psiquiatria</option>
+            <option value="CLINICA_GERAL">Clínica Geral</option>
+          </select>
+          <select id="medicoClinica" required>
+            <option value="">Selecione Clínica</option>
+          </select>
+          <button type="submit" class="btn btn-primary">
+            Adicionar Médico
+          </button>
+        </form>
+        <div id="listaMedicos" class="list-container"></div>
+      </section>
+
+      <!-- PACIENTES -->
+      <section id="pacientes" class="tab-content">
+        <h2>Pacientes</h2>
+        <form id="formPaciente" class="form-container">
+          <input type="hidden" id="pacienteId" />
+          <input
+            type="text"
+            id="pacienteNome"
+            placeholder="Nome do Paciente"
+            required
+          />
+          <input type="email" id="pacienteEmail" placeholder="Email" required />
+          <input
+            type="tel"
+            id="pacienteTelefone"
+            placeholder="Telefone"
+            required
+          />
+          <input type="date" id="pacienteDataNascimento" required />
+          <button type="submit" class="btn btn-primary">
+            Adicionar Paciente
+          </button>
+        </form>
+        <div id="listaPacientes" class="list-container"></div>
+      </section>
+
+      <!-- REMÉDIOS -->
+      <section id="remedios" class="tab-content">
+        <h2>Remédios</h2>
+        <form id="formRemedio" class="form-container">
+          <input type="hidden" id="remedioId" />
+          <input
+            type="text"
+            id="remedioNome"
+            placeholder="Nome do Remédio"
+            required
+          />
+          <input
+            type="text"
+            id="remedioPrincipioAtivo"
+            placeholder="Princípio Ativo"
+            required
+          />
+          <input
+            type="number"
+            id="remedioDosagem"
+            placeholder="Dosagem (mg)"
+            required
+          />
+          <textarea id="remedioDescricao" placeholder="Descrição"></textarea>
+          <button type="submit" class="btn btn-primary">
+            Adicionar Remédio
+          </button>
+        </form>
+        <div id="listaRemedios" class="list-container"></div>
+      </section>
+
+      <!-- PRESCRIÇÕES -->
+      <section id="prescricoes" class="tab-content">
+        <h2>Prescrições</h2>
+        <form id="formPrescricao" class="form-container">
+          <input type="hidden" id="prescricaoId" />
+          <select id="prescricaoRemedio" required>
+            <option value="">Selecione Remédio</option>
+          </select>
+          <input
+            type="text"
+            id="prescricaoDosagem"
+            placeholder="Dosagem"
+            required
+          />
+          <input
+            type="text"
+            id="prescricaoFrequencia"
+            placeholder="Frequência (ex: 8 em 8h)"
+            required
+          />
+          <input type="datetime-local" id="prescricaoDataInicio" required />
+          <input type="datetime-local" id="prescricaoDataTermino" required />
+          <textarea id="prescricaoDescricao" placeholder="Descrição"></textarea>
+          <select id="prescricaoMedico" required>
+            <option value="">Selecione Médico</option>
+          </select>
+          <select id="prescricaoPaciente" required>
+            <option value="">Selecione Paciente</option>
+          </select>
+          <button type="submit" class="btn btn-primary">
+            Adicionar Prescrição
+          </button>
+        </form>
+        <div id="listaPrescricoes" class="list-container"></div>
+      </section>
+
+      <!-- REGISTRO DE CONSUMO -->
+      <section id="consumo" class="tab-content">
+        <h2>Registro de Consumo</h2>
+        <form id="formConsumo" class="form-container">
+          <input type="hidden" id="consumoId" />
+          <select id="consumoPrescricao" required>
+            <option value="">Selecione Prescrição</option>
+          </select>
+          <input type="datetime-local" id="consumoDataHora" required />
+          <select id="consumoStatus" required>
+            <option value="">Selecione Status</option>
+            <option value="TOMADO">Tomado</option>
+            <option value="PERDIDO">Perdido</option>
+            <option value="ADIADO">Adiado</option>
+          </select>
+          <textarea
+            id="consumoObservacoes"
+            placeholder="Observações"
+          ></textarea>
+          <button type="submit" class="btn btn-primary">
+            Registrar Consumo
+          </button>
+        </form>
+        <div id="listaConsumo" class="list-container"></div>
+      </section>
+
+      <div id="mensagem" class="mensagem"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

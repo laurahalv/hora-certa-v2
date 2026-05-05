@@ -1,5 +1,6 @@
-package com.hora.certa.back.remedio;
+package com.hora.certa.back.models;
 
+import com.hora.certa.back.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

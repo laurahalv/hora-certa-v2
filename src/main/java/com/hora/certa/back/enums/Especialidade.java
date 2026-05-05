@@ -1,4 +1,4 @@
-package com.hora.certa.back.medico;
+package com.hora.certa.back.enums;
 
 public enum Especialidade {
     CLINICA_GERAL("Clínica Geral"),
