@@ -119,7 +119,8 @@ async function salvarClinica(e) {
     email: document.getElementById("clinicaEmail").value,
     cnpj: document.getElementById("clinicaCnpj").value,
     endereco: document.getElementById("clinicaEndereco").value,
-  };
+    senha: document.getElementById("clinicaSenha").value // Adicionado
+};
 
   try {
     if (id) {
@@ -233,10 +234,11 @@ async function salvarMedico(e) {
   const dados = {
     nome: document.getElementById("medicoNome").value,
     email: document.getElementById("medicoEmail").value,
+    senha: document.getElementById("medicoSenha").value, // Adicionado
     crm: document.getElementById("medicoCrm").value,
     especialidade: document.getElementById("medicoEspecialidade").value,
     clinicaId: parseInt(document.getElementById("medicoClinica").value),
-  };
+};
 
   try {
     if (id) {
@@ -352,11 +354,12 @@ async function salvarPaciente(e) {
   const dados = {
     nome: document.getElementById("pacienteNome").value,
     email: document.getElementById("pacienteEmail").value,
+    senha: document.getElementById("pacienteSenha").value, // Adicionado
     cpf: document.getElementById("pacienteCpf").value,
     telefonePrimario: document.getElementById("pacienteTelefonePrimario").value,
     telefone: document.getElementById("pacienteTelefone").value,
     clinicaId: parseInt(document.getElementById("pacienteClinica").value),
-  };
+};
 
   try {
     if (id) {
