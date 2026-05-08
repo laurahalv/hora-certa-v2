@@ -27,6 +27,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 10px 10%;
+    height: 11vh;
 }
 
 .header-introduce {
@@ -95,6 +96,7 @@ button:hover:after {
     align-items: center;    
     justify-content: space-between;
     padding: 10px 15%;
+    height: 39vh;
 }
 
 .main-content .main-content-introduce {
@@ -132,6 +134,7 @@ button:hover:after {
     height: 435px;
     padding: 10px 15%;
     gap: 20px;
+    height: 44vh;
 }
 
 .main-content-cards .title-cards{
@@ -178,4 +181,5 @@ footer {
     color: var(--text-color-white);
     text-align: center;
     padding: 20px 10%;
+    height: 6vh;
 }
