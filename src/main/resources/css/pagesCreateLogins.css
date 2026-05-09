@@ -82,5 +82,125 @@
     background-color: var(--primary-color);
 }
 
+/* ================================
+   RESPONSIVIDADE — Login Page
+   Cole ao final do seu CSS existente
+   ================================ */
+ 
+/* ── TABLET  (até 1024px) ── */
+@media (max-width: 1024px) {
+ 
+  .logo-image {
+    width: 160px;
+  }
+ 
+  .btnLogins {
+    width: 320px;
+    font-size: 16px;
+  }
+}
+ 
+/* ── MOBILE GRANDE  (até 768px) ── */
+@media (max-width: 768px) {
+ 
+  /* Empilha as duas metades verticalmente */
+  .container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+ 
+  /* Lado da imagem vira faixa no topo */
+  .container-image {
+    width: 100%;
+    height: 20vh;
+    min-height: 180px;
+    padding: 20px;
+  }
+ 
+  .logo-image {
+    width: 120px;
+  }
+ 
+  /* Lado do formulário ocupa o restante */
+  .contaiener-form {
+    width: 100%;
+    height: auto;
+    flex: 1;
+    padding: 40px 20px;
+  }
+ 
+  .contaiener-form h1 {
+    font-size: 1.8em;
+    margin-bottom: 16px;
+  }
+ 
+  .btnLogins {
+    width: 100%;
+    max-width: 360px;
+    font-size: 20px;
+    height: 47px;
+    margin: 8px 0;
+  }
+}
+ 
+/* ── MOBILE PEQUENO  (até 480px) ── */
+@media (max-width: 480px) {
+ 
+  .container-image {
+    height: 25vh;
+    min-height: 150px;
+    padding: 16px;
+  }
+ 
+  .logo-image {
+    width: 100px;
+  }
+ 
+  .contaiener-form {
+    padding: 32px 16px;
+  }
+ 
+  .contaiener-form h1 {
+    font-size: 1.3em;
+    margin-bottom: 14px;
+  }
+ 
+  .btnLogins {
+    max-width: 100%;
+    font-size: 15px;
+    height: 42px;
+  }
+}
+ 
+/* ── MOBILE MUITO PEQUENO  (até 360px) ── */
+@media (max-width: 360px) {
+ 
+  .container-image {
+    height: 22vh;
+    min-height: 130px;
+    padding: 12px;
+  }
+ 
+  .logo-image {
+    width: 85px;
+  }
+ 
+  .contaiener-form {
+    padding: 24px 12px;
+  }
+ 
+  .contaiener-form h1 {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+  }
+ 
+  .btnLogins {
+    font-size: 14px;
+    height: 40px;
+    margin: 6px 0;
+  }
+}
+
 
 
