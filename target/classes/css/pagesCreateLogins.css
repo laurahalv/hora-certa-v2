@@ -1,0 +1,86 @@
+/* FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #1C279C;
+    --secondary-color: #061521;
+    --third-color: #3A6D8C;
+    --text-color-white: #FFFFFF;
+    --text-color-black: #000000;
+    --border-radius: 4px;
+    --font-family: 'Roboto', sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+/* MAIN */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.container-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    color: var(--text-color-white);
+    background-color: var(--primary-color);
+}
+
+.logo-image {
+    width: 200px;
+    height: auto;
+}
+
+.logo-image img {  
+    width: 100%;
+    height: auto;
+}
+
+
+.contaiener-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    background-color: var(--secondary-color);
+}
+
+.contaiener-form h1 {
+    color: var(--text-color-white);
+    margin-bottom: 20px;
+}
+
+.btnLogins {
+    width: 400px;
+    height: 40px;
+    margin: 10px;
+    background-color: var(--third-color);
+    color: var(--text-color-white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnLogins:hover {
+    background-color: var(--primary-color);
+}
+
+
+
