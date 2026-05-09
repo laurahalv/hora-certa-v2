@@ -8,3 +8,4 @@ btnEntrar.addEventListener('click', () => {
 btnCriarConta.addEventListener('click', () => {
     window.location.href = 'pageCreateLogins.html';
 });
+
