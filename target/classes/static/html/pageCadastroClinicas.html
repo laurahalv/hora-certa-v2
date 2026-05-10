@@ -1,37 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/pagesCreateLogins.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pagesCreateLogins.css" />
     <title>Cadastro de Clínicas</title>
-    
-</head>
-<body>
+  </head>
+  <body>
     <main class="container">
-        <section class="container-image">
-            <div class="logo-image">
-                <img src="../img/icon_convertido.svg" alt="Logo Hora Certa" />
-            </div>
-            <h1>Hora Certa!</h1>
-        </section>
-        <section class="container-form">
-            <h1>Cadastro Clínica!</h1>
-            <label for="nome-clinica">Nome da Clínica:</label>
-            <input type="text" id="nome-clinica" name="nome-clinica" placeholder="Digite o nome da clínica" required>
+      <section class="container-image">
+        <div class="logo-image">
+          <img src="../img/icon_convertido.svg" alt="Logo Hora Certa" />
+        </div>
+        <h1>Hora Certa!</h1>
+      </section>
+      <section class="container-form">
+        <h1>Cadastro Clínica!</h1>
+        <label for="nome-clinica">Nome da Clínica:</label>
+        <input
+          type="text"
+          id="nome-clinica"
+          name="nome-clinica"
+          placeholder="Digite o nome da clínica"
+          required
+        />
 
-            <label for="cnpj-clinica">CNPJ da Clínica:</label>
-            <input type="text" id="cnpj-clinica" name="cnpj-clinica" placeholder="Digite o CNPJ da clínica" required>
+        <label for="endereco-clinica">Endereço da Clínica:</label>
+        <input
+          type="text"
+          id="endereco-clinica"
+          name="endereco-clinica"
+          placeholder="Digite o endereço da clínica"
+          required
+        />
 
-            <label for="email-clinica">Email da Clínica:</label>
-            <input type="email" id="email-clinica" name="email-clinica" placeholder="Digite o email da clínica" required>
+        <label for="cnpj-clinica">CNPJ da Clínica:</label>
+        <input
+          type="text"
+          id="cnpj-clinica"
+          name="cnpj-clinica"
+          placeholder="Digite o CNPJ da clínica"
+          required
+        />
 
-            <label for="senha-clinica">Senha:</label>
-            <input type="password" id="senha-clinica" name="senha-clinica" placeholder="Digite a senha" required>
-            
-            <button class="btnLogins btnCriar-Clinicas">Criar Conta</button>
-        </section>
+        <label for="email-clinica">Email da Clínica:</label>
+        <input
+          type="email"
+          id="email-clinica"
+          name="email-clinica"
+          placeholder="Digite o email da clínica"
+          required
+        />
+
+        <label for="senha-clinica">Senha:</label>
+        <input
+          type="password"
+          id="senha-clinica"
+          name="senha-clinica"
+          placeholder="Digite a senha"
+          required
+        />
+
+        <button class="btnLogins btnCriar-Clinicas" type="button">
+          Criar Conta
+        </button>
+      </section>
     </main>
-    
-</body>
+
+    <script>
+      document
+        .querySelector(".btnCriar-Clinicas")
+        .addEventListener("click", async function () {
+          const nome = document.getElementById("nome-clinica").value.trim();
+          const endereco = document
+            .getElementById("endereco-clinica")
+            .value.trim();
+          const cnpj = document.getElementById("cnpj-clinica").value.trim();
+          const email = document.getElementById("email-clinica").value.trim();
+          const senha = document.getElementById("senha-clinica").value.trim();
+
+          if (!nome || !endereco || !cnpj || !email || !senha) {
+            alert("Por favor, preencha todos os campos obrigatórios");
+            return;
+          }
+
+          try {
+            const response = await fetch("http://localhost:8080/api/clinicas", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                nome: nome,
+                email: email,
+                senha: senha,
+                cnpj: cnpj,
+                endereco: endereco,
+              }),
+            });
+
+            if (response.ok) {
+              alert("Clínica criada com sucesso!");
+              document.getElementById("nome-clinica").value = "";
+              document.getElementById("endereco-clinica").value = "";
+              document.getElementById("cnpj-clinica").value = "";
+              document.getElementById("email-clinica").value = "";
+              document.getElementById("senha-clinica").value = "";
+              window.location.href = "/src/main/resources/static/pageLogins.html";
+            } else {
+              let errorMessage = "Tente novamente";
+              const contentType = response.headers.get("content-type");
+
+              if (contentType && contentType.includes("application/json")) {
+                try {
+                  const errorData = await response.json();
+                  errorMessage = errorData.message || errorMessage;
+                } catch (e) {
+                  errorMessage = `Erro ${response.status}: ${response.statusText}`;
+                }
+              } else {
+                errorMessage = `Erro ${response.status}: ${response.statusText}`;
+              }
+
+              alert("Erro ao criar clínica: " + errorMessage);
+            }
+          } catch (error) {
+            console.error("Erro:", error);
+            alert("Erro na requisição: " + error.message);
+          }
+        });
+    </script>
+  </body>
 </html>
