@@ -1,17 +1,22 @@
 package com.hora.certa.back.controller;
 
-import com.hora.certa.back.dto.MedicoCreateDTO;
-import com.hora.certa.back.dto.MedicoDTO;
-import com.hora.certa.back.models.Clinica;
-import com.hora.certa.back.models.Medico;
-import com.hora.certa.back.repository.MedicoRepository;
-import com.hora.certa.back.service.MedicoService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.hora.certa.back.dto.MedicoCreateDTO;
+import com.hora.certa.back.dto.MedicoDTO;
+import com.hora.certa.back.models.Medico;
+import com.hora.certa.back.repository.MedicoRepository;
+import com.hora.certa.back.service.MedicoService;
 
 @RestController
 @RequestMapping("/api/medicos")

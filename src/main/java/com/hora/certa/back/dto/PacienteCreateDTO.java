@@ -24,9 +24,7 @@ public class PacienteCreateDTO {
     @NotBlank(message = "CPF é obrigatório")
     private String cpf;
 
-    @NotBlank(message = "Telefone primário é obrigatório")
-    private String telefonePrimario;
-
+    @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
 
     private Long medicoId;
@@ -34,4 +32,3 @@ public class PacienteCreateDTO {
     @NotNull(message = "ID da clínica é obrigatório")
     private Long clinicaId;
 }
-
