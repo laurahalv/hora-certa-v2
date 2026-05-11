@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/pageClinicas.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pageClinicas.css" />
     <title>Dashboard | Clinicas</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
       <div class="header-introduce">
         <div class="header-logo">
@@ -16,7 +16,7 @@
         <div class="title">
           <h1>Hora Certa</h1>
         </div>
-     </div>
+      </div>
 
       <div class="header-links">
         <a href="#" class="header-link">Dashboard</a>
@@ -26,5 +26,93 @@
         <a href="#" class="header-link">Configurações</a>
       </div>
     </header>
-</body>
+    <main class="dashboard-container">
+      <section class="dashboard">
+        <h2>Dashboard</h2>
+        <p>Visão geral da clinica e indicadores</p>
+      </section>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Total de Pacientes</h3>
+          <div class="card-data">
+            <div class="card-teste">
+              <div class="card-value">
+                <p>6</p>
+              </div>
+
+              <div class="card-image">
+                <img
+                  src="../img/iconPacientes-Dashboard.png"
+                  alt="Ícone de Pacientes"
+                />
+              </div>
+            </div>
+
+            <p class="card-description">Cadastrados no Sistema</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Médicos Ativos</h3>
+          <div class="card-data">
+            <div class="card-teste">
+              <div class="card-value">
+                <p>4</p>
+              </div>
+
+              <div class="card-image">
+                <img
+                  src="../img/iconMedicosAtivos-Dashboard.png"
+                  alt="Ícone de Médicos Ativos"
+                />
+              </div>
+            </div>
+
+            <p class="card-description">Médicos Cadastrados</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Convites Pendentes</h3>
+          <div class="card-data">
+            <div class="card-teste">
+              <div class="card-value">
+                <p>2</p>
+              </div>
+
+              <div class="card-image">
+                <img
+                  src="../img/iconEmail-Dashboard.png"
+                  alt="Ícone de Convites Pendentes"
+                />
+              </div>
+            </div>
+
+            <p class="card-description">Aguardando respostas</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Adesão Media</h3>
+          <div class="card-data">
+            <div class="card-teste">  
+              <div class="card-value">
+                <p>87%</p>
+              </div>
+
+              <div class="card-image">
+                <img
+                  src="../img/iconGrafico-Dashboard.png"
+                  alt="Ícone de Adesão Media"
+                />
+              </div>
+            </div>
+
+            <p class="card-description">Aos Tratamentos</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
