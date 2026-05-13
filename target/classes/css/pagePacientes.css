@@ -1,0 +1,371 @@
+/* FONTE */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --primary-color: #1c279c;
+  --secondary-color: #061521;
+  --third-color: #3a6d8c;
+  --text-color-white: #ffffff;
+  --text-color-black: #000000;
+  --border-radius: 4px;
+  --font-family: "Roboto", sans-serif;
+  --adesao-green: #22c55e;
+  --adesao-yellow: #f59e0b;
+  --adesao-red: #ef4444;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+/* HEADER */
+header {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10%;
+  height: 11vh;
+}
+
+.header-introduce {
+  display: flex;
+  align-items: center;
+}
+.header-logo {
+  width: 80px;
+  height: auto;
+}
+.header-logo img {
+  width: 100%;
+  height: auto;
+}
+/* LINKS - HEADER */
+
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.header-link {
+  color: var(--text-color-white);
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.header-link:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.1);
+}
+
+.dashboard h2 {
+  color: var(--text-color-black);
+  margin-bottom: 10px;
+}
+
+.dashboard p {
+  color: var(--text-color-black);
+  font-size: 18px;
+}
+
+.dashboard-container {
+  padding: 20px 10%;
+}
+
+.dashboard .addPaciente {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard .addPaciente p {
+  font-size: 18px;
+  color: var(--text-color-black);
+}
+
+.dashboard .addPaciente button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 5px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard .addPaciente button:hover {
+  background-color: var(--third-color);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+}
+
+.searchInput input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  outline: none;
+}
+
+.searchInput select {
+  background-color: #dfdfdf;
+  color: var(--text-color-black);
+  border: none;
+  padding: 10px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  float: right;
+  outline: none;
+}
+
+/* ===== CARD PACIENTE ===== */
+
+.cards-container {
+    overflow-y: auto;
+    height: 465px;   
+}
+
+.card {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+  animation: fadeUp 0.3s ease both;
+  margin-bottom: 12px;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: #c7d2fe;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Atraso de entrada por card */
+.card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+/* ===== AVATAR ===== */
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #3b82f6;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ===== INFO PRINCIPAL ===== */
+.info-principal {
+  min-width: 200px;
+}
+
+.info-principal .nome {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.info-principal .contatos {
+  display: flex;
+  gap: 14px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.contato-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ===== DIVISOR VERTICAL ===== */
+.divider-v {
+  width: 1px;
+  height: 36px;
+  background: #e5e7eb;
+  flex-shrink: 0;
+}
+
+/* ===== COLUNAS ===== */
+.col-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.col-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.col-medico {
+  min-width: 140px;
+}
+.col-consulta {
+  min-width: 130px;
+}
+
+/* ===== TRATAMENTOS ===== */
+.col-tratamentos {
+  min-width: 70px;
+  text-align: center;
+}
+
+.tratamentos-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===== ADESÃO ===== */
+.col-adesao {
+  min-width: 100px;
+}
+
+.adesao-bar-bg {
+  height: 8px;
+  border-radius: 99px;
+  background: #e5e7eb;
+  width: 80px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.adesao-bar {
+  height: 100%;
+  border-radius: 99px;
+  /* width e background definidos inline conforme % */
+}
+
+.adesao-valor {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 3px;
+  /* cor definida inline conforme % */
+}
+
+/* ===== PRÓXIMA CONSULTA ===== */
+.consulta-data {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 3px;
+}
+
+/* ===== BOTÃO ===== */
+.btn-detalhes {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+}
+
+.btn-detalhes:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+.btn-detalhes:active {
+  transform: translateY(0);
+}
+
+/* ===== LISTA WRAPPER ===== */
+.pacientes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lista-header {
+  margin-bottom: 20px;
+}
+.lista-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+.lista-header p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-color-white);
+    text-align: center;
+    padding: 20px 10%;
+    position: absolute;
+    bottom: 0;  
+    width: 100%;
+}
