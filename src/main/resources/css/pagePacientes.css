@@ -14,7 +14,6 @@
   --adesao-red: #ef4444;
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -147,8 +146,8 @@ header {
 /* ===== CARD PACIENTE ===== */
 
 .cards-container {
-    overflow-y: auto;
-    height: 465px;   
+  overflow-y: auto;
+  height: 465px;
 }
 
 .card {
@@ -373,7 +372,7 @@ header {
   max-width: 860px;
   margin: 0 auto;
   padding: 32px 24px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 /* Voltar */
@@ -391,7 +390,9 @@ header {
   gap: 6px;
   transition: color 0.15s;
 }
-.btn-voltar:hover { color: #111827; }
+.btn-voltar:hover {
+  color: #111827;
+}
 
 /* Header */
 .paciente-header {
@@ -404,20 +405,47 @@ header {
   background: #fff;
   margin-bottom: 20px;
 }
-.header-esquerda { display: flex; align-items: center; gap: 16px; }
+.header-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
 .avatar-grande {
-  width: 52px; height: 52px; border-radius: 50%;
-  background: #dbeafe; color: #3b82f6;
-  font-size: 22px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #3b82f6;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.paciente-nome  { font-size: 18px; font-weight: 700; color: #111827; }
-.paciente-contatos { display: flex; gap: 16px; margin-top: 4px; font-size: 13px; color: #6b7280; }
-.header-direita { text-align: right; }
-.medico-nome    { font-size: 15px; font-weight: 700; color: #111827; margin-top: 4px; }
+.paciente-nome {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+.paciente-contatos {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #6b7280;
+}
+.header-direita {
+  text-align: right;
+}
+.medico-nome {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
 
 /* Grid de resumo */
 .resumo-grid {
@@ -441,15 +469,34 @@ header {
   color: #111827;
   margin-top: 8px;
 }
-.resumo-data   { font-size: 22px; }
-.resumo-icone  { position: absolute; top: 18px; right: 20px; font-size: 22px; opacity: 0.4; }
-.adesao-label  { font-size: 13px; font-weight: 600; }
+.resumo-data {
+  font-size: 22px;
+}
+.resumo-icone {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 22px;
+  opacity: 0.4;
+}
+.adesao-label {
+  font-size: 13px;
+  font-weight: 600;
+}
 
 /* Medicamentos */
 .medicamentos-secao h3 {
-  font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
 }
-.medicamentos-lista { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.medicamentos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
 
 .med-card {
   border: 1.5px solid #e5e7eb;
@@ -462,24 +509,44 @@ header {
   justify-content: space-between;
   align-items: flex-start;
 }
-.med-nome  { font-size: 16px; font-weight: 700; color: #111827; }
-.med-dose  { font-size: 13px; color: #6b7280; margin-top: 3px; }
-.med-adesao-info { text-align: right; }
-.med-adesao-valor { font-size: 20px; font-weight: 700; }
-.med-periodo { font-size: 12px; color: #9ca3af; }
+.med-nome {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+.med-dose {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 3px;
+}
+.med-adesao-info {
+  text-align: right;
+}
+.med-adesao-valor {
+  font-size: 20px;
+  font-weight: 700;
+}
+.med-periodo {
+  font-size: 12px;
+  color: #9ca3af;
+}
 
 /* Barra de adesão */
 .adesao-bar-bg {
-  height: 8px; border-radius: 99px;
-  background: #e5e7eb; overflow: hidden;
+  height: 8px;
+  border-radius: 99px;
+  background: #e5e7eb;
+  overflow: hidden;
 }
-.adesao-bar { height: 100%; border-radius: 99px; }
-.col-label  { font-size: 12px; color: #9ca3af; font-weight: 500; }
-
-
-
-
-
+.adesao-bar {
+  height: 100%;
+  border-radius: 99px;
+}
+.col-label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
 
 /* BTN ADD PACIENTE */
 /* ===== MODAL ===== */
@@ -494,7 +561,9 @@ header {
   transition: opacity 0.25s ease;
 }
 
-#modalPaciente.ativo { opacity: 1; }
+#modalPaciente.ativo {
+  opacity: 1;
+}
 
 .modal-overlay {
   position: absolute;
@@ -514,14 +583,33 @@ header {
   transition: transform 0.25s ease;
 }
 
-#modalPaciente.ativo .modal-box { transform: translateY(0); }
+#modalPaciente.ativo .modal-box {
+  transform: translateY(0);
+}
 
-.modal-box h2 { font-size: 20px; font-weight: 700; color: #111827; }
-.modal-sub    { font-size: 13px; color: #9ca3af; margin-top: 4px; margin-bottom: 20px; }
+.modal-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+.modal-sub {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
 
 /* Campos */
-.modal-campo        { margin-bottom: 14px; }
-.modal-campo label  { display: block; font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 6px; }
+.modal-campo {
+  margin-bottom: 14px;
+}
+.modal-campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
 
 .modal-campo input,
 .modal-campo select {
@@ -537,10 +625,18 @@ header {
 }
 
 .modal-campo input:focus,
-.modal-campo select:focus { border-color: #a5b4fc; background: #fff; }
+.modal-campo select:focus {
+  border-color: #a5b4fc;
+  background: #fff;
+}
 
 /* Ações */
-.modal-acoes { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
 
 .btn-cancelar {
   padding: 9px 20px;
@@ -553,7 +649,9 @@ header {
   cursor: pointer;
   transition: background 0.15s;
 }
-.btn-cancelar:hover { background: #f3f4f6; }
+.btn-cancelar:hover {
+  background: #f3f4f6;
+}
 
 .btn-cadastrar {
   padding: 9px 20px;
@@ -566,8 +664,9 @@ header {
   cursor: pointer;
   transition: background 0.15s;
 }
-.btn-cadastrar:hover { background: #4338ca; }
-
+.btn-cadastrar:hover {
+  background: #4338ca;
+}
 
 footer {
   background-color: var(--primary-color);

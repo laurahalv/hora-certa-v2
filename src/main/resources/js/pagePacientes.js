@@ -27,7 +27,7 @@ const pacientes = [
     ultimaConsulta: "09/03/2026",
     medicamentos: [
       { nome: "Losartana 50mg", dose: "1 comprimido", frequencia: "1x ao dia", adesao: 95, inicio: "31/12/2025", termino: "30/12/2026" },
-      { nome: "Atenolol 25mg",  dose: "1 comprimido", frequencia: "2x ao dia", adesao: 89, inicio: "31/12/2025", termino: "30/12/2026" }
+      { nome: "Atenolol 25mg", dose: "1 comprimido", frequencia: "2x ao dia", adesao: 89, inicio: "31/12/2025", termino: "30/12/2026" }
     ]
   },
   {
@@ -293,11 +293,11 @@ async function carregarMedicos() {
 
 async function cadastrarPaciente() {
   const dados = {
-    nome:        document.getElementById("pacNome").value.trim(),
-    email:       document.getElementById("pacEmail").value.trim(),
-    telefone:    document.getElementById("pacTelefone").value.trim(),
+    nome: document.getElementById("pacNome").value.trim(),
+    email: document.getElementById("pacEmail").value.trim(),
+    telefone: document.getElementById("pacTelefone").value.trim(),
     responsavel: document.getElementById("pacResponsavel").value.trim(),
-    medico_id:   document.getElementById("pacMedico").value
+    medico_id: document.getElementById("pacMedico").value
   };
 
   if (!dados.nome || !dados.email || !dados.medico_id) {
