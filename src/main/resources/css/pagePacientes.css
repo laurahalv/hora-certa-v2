@@ -22,6 +22,12 @@
   font-family: var(--font-family);
 }
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* HEADER */
 header {
   background-color: var(--primary-color);
@@ -317,7 +323,7 @@ header {
 .btn-detalhes {
   margin-left: auto;
   flex-shrink: 0;
-  background: #4f46e5;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -360,12 +366,214 @@ header {
   margin-top: 2px;
 }
 
+/* BTN VER_DATALHES DE PACIENTE ESPECÍFICO */
+
+/* ===== PÁGINA PACIENTE ===== */
+.pagina-paciente {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Voltar */
+.btn-voltar {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.btn-voltar:hover { color: #111827; }
+
+/* Header */
+.paciente-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 24px;
+  background: #fff;
+  margin-bottom: 20px;
+}
+.header-esquerda { display: flex; align-items: center; gap: 16px; }
+
+.avatar-grande {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #dbeafe; color: #3b82f6;
+  font-size: 22px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.paciente-nome  { font-size: 18px; font-weight: 700; color: #111827; }
+.paciente-contatos { display: flex; gap: 16px; margin-top: 4px; font-size: 13px; color: #6b7280; }
+.header-direita { text-align: right; }
+.medico-nome    { font-size: 15px; font-weight: 700; color: #111827; margin-top: 4px; }
+
+/* Grid de resumo */
+.resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.resumo-card {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 20px;
+  background: #fff;
+  position: relative;
+}
+
+.resumo-valor {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 8px;
+}
+.resumo-data   { font-size: 22px; }
+.resumo-icone  { position: absolute; top: 18px; right: 20px; font-size: 22px; opacity: 0.4; }
+.adesao-label  { font-size: 13px; font-weight: 600; }
+
+/* Medicamentos */
+.medicamentos-secao h3 {
+  font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px;
+}
+.medicamentos-lista { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+
+.med-card {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 20px;
+  background: #fff;
+}
+.med-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.med-nome  { font-size: 16px; font-weight: 700; color: #111827; }
+.med-dose  { font-size: 13px; color: #6b7280; margin-top: 3px; }
+.med-adesao-info { text-align: right; }
+.med-adesao-valor { font-size: 20px; font-weight: 700; }
+.med-periodo { font-size: 12px; color: #9ca3af; }
+
+/* Barra de adesão */
+.adesao-bar-bg {
+  height: 8px; border-radius: 99px;
+  background: #e5e7eb; overflow: hidden;
+}
+.adesao-bar { height: 100%; border-radius: 99px; }
+.col-label  { font-size: 12px; color: #9ca3af; font-weight: 500; }
+
+
+
+
+
+
+/* BTN ADD PACIENTE */
+/* ===== MODAL ===== */
+#modalPaciente {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#modalPaciente.ativo { opacity: 1; }
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-box {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(12px);
+  transition: transform 0.25s ease;
+}
+
+#modalPaciente.ativo .modal-box { transform: translateY(0); }
+
+.modal-box h2 { font-size: 20px; font-weight: 700; color: #111827; }
+.modal-sub    { font-size: 13px; color: #9ca3af; margin-top: 4px; margin-bottom: 20px; }
+
+/* Campos */
+.modal-campo        { margin-bottom: 14px; }
+.modal-campo label  { display: block; font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 6px; }
+
+.modal-campo input,
+.modal-campo select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-campo input:focus,
+.modal-campo select:focus { border-color: #a5b4fc; background: #fff; }
+
+/* Ações */
+.modal-acoes { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+
+.btn-cancelar {
+  padding: 9px 20px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-cancelar:hover { background: #f3f4f6; }
+
+.btn-cadastrar {
+  padding: 9px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-cadastrar:hover { background: #4338ca; }
+
+
 footer {
-    background-color: var(--primary-color);
-    color: var(--text-color-white);
-    text-align: center;
-    padding: 20px 10%;
-    position: absolute;
-    bottom: 0;  
-    width: 100%;
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  text-align: center;
+  padding: 20px 10%;
+  width: 100%;
+  margin-top: auto; /* empurra para o fim do conteúdo */
 }
