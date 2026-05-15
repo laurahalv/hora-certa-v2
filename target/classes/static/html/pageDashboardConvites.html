@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pageConvites.css" />
+    <script defer src="../../js/pageConvites.js"></script>
+    <title>Dashboard | Pacientes</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-introduce">
+        <div class="header-logo">
+          <img src="../img/icon_convertido.svg" alt="Logo Hora Certa" />
+        </div>
+
+        <div class="title">
+          <h1>Hora Certa</h1>
+        </div>
+      </div>
+
+      <div class="header-links">
+        <a href="#" class="header-link">Dashboard</a>
+        <a href="#" class="header-link">Pacientes</a>
+        <a href="#" class="header-link">Médicos</a>
+        <a href="#" class="header-link">Convites</a>
+        <a href="#" class="header-link">Configurações</a>
+      </div>
+    </header>
+
+    <main class="dashboard-container">
+      <section class="dashboard">
+        <h2>Convites</h2>
+        <div class="addConvite">
+          <p>Gerencie os médicos cadastrados na clínica</p>
+          <button type="submit" class="btn">Novo Convite</button>
+        </div>
+      </section>
+
+      <!-- Input de pesquisa  -->
+      <div class="searchInput">
+        <input type="text" placeholder="Pesquisar médicos..." />
+      </div>
+
+      <div id="tela-lista">
+        <!-- Resumo topo -->
+        <div id="resumo-convites" class="resumo-convites-grid"></div>
+
+        <!-- Lista -->
+        <div class="lista-convites-box">
+          <div class="lista-convites-header">
+            <div>
+              <h3>Lista de Convites</h3>
+              <p>Todos os convites enviados pelo sistema</p>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div id="convites-tabs" class="convites-tabs"></div>
+
+          <!-- Itens -->
+          <div id="lista-convites"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Hora Certa. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>
