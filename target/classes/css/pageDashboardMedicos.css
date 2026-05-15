@@ -1,0 +1,583 @@
+/* FONTE */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ===== VARIÁVEIS ===== */
+:root {
+  --primary-color: #1c279c;
+  --secondary-color: #061521;
+  --third-color: #3a6d8c;
+  --text-color-white: #ffffff;
+  --text-color-black: #000000;
+  --border-radius: 4px;
+  --font-family: "Roboto", sans-serif;
+  --adesao-green: #22c55e;
+  --adesao-yellow: #f59e0b;
+  --adesao-red: #ef4444;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+header {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10%;
+  height: 11vh;
+}
+
+.header-introduce {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 80px;
+  height: auto;
+}
+
+.header-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.header-link {
+  color: var(--text-color-white);
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.header-link:hover {
+  transform: scale(1.1);
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard-container {
+  padding: 20px 10%;
+  flex: 1; /* empurra o footer para baixo */
+}
+
+.dashboard h2 {
+  color: var(--text-color-black);
+  margin-bottom: 10px;
+}
+
+.dashboard p {
+  color: var(--text-color-black);
+  font-size: 18px;
+}
+
+/* ===== ADD MÉDICO ===== */
+.dashboard .addMedico {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard .addMedico p {
+  font-size: 18px;
+  color: var(--text-color-black);
+}
+
+.dashboard .addMedico button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 5px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard .addMedico button:hover {
+  background-color: var(--third-color);
+}
+
+/* ===== SEARCH ===== */
+.searchInput {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+}
+
+.searchInput input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  outline: none;
+}
+
+.searchInput select {
+  background-color: #dfdfdf;
+  color: var(--text-color-black);
+  border: none;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  outline: none;
+}
+
+/* ===== ANIMAÇÃO ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== GRID DE CARDS ===== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 24px 0;
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+/* ===== CARD MÉDICO ===== */
+.card-medico {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+
+.card-medico:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: #c7d2fe;
+}
+
+.card-medico:nth-child(1) { animation-delay: 0.05s; }
+.card-medico:nth-child(2) { animation-delay: 0.10s; }
+.card-medico:nth-child(3) { animation-delay: 0.15s; }
+.card-medico:nth-child(4) { animation-delay: 0.20s; }
+
+/* Topo do card médico */
+.medico-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.medico-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.medico-info { flex: 1; }
+
+.medico-nome {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.medico-especialidade {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+/* Status */
+.medico-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.status-ativo  { background: #dcfce7; color: #16a34a; }
+.status-inativo { background: #fee2e2; color: #dc2626; }
+
+/* Contatos */
+.medico-contatos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.medico-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.medico-contato-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.medico-crm {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Divisor */
+.medico-divider {
+  height: 1px;
+  background: #e5e7eb;
+}
+
+/* Rodapé do card */
+.medico-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.medico-stat-label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.medico-stat-valor {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.medico-stat-direita { text-align: right; }
+
+.medico-adesao-valor {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Botão ver pacientes */
+.btn-ver-pacientes {
+  width: 100%;
+  padding: 10px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.btn-ver-pacientes:hover { background: #e5e7eb; }
+
+/* ===== CARD PACIENTE ===== */
+.card {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-color: #c7d2fe;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #3b82f6;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-principal            { min-width: 200px; }
+.info-principal .nome      { font-size: 15px; font-weight: 700; color: #111827; }
+.info-principal .contatos  { display: flex; gap: 14px; margin-top: 4px; flex-wrap: wrap; }
+
+.contato-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.divider-v {
+  width: 1px;
+  height: 36px;
+  background: #e5e7eb;
+  flex-shrink: 0;
+}
+
+.col-label  { font-size: 11px; color: #9ca3af; font-weight: 500; margin-bottom: 3px; }
+.col-value  { font-size: 13px; font-weight: 600; color: #111827; }
+.col-medico { min-width: 140px; }
+
+.col-tratamentos  { min-width: 70px; text-align: center; }
+.tratamentos-num  { font-size: 22px; font-weight: 700; color: #111827; }
+
+.col-adesao { min-width: 100px; }
+
+.adesao-bar-bg {
+  height: 8px;
+  border-radius: 99px;
+  background: #e5e7eb;
+  width: 80px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.adesao-bar   { height: 100%; border-radius: 99px; }
+.adesao-valor { font-size: 12px; font-weight: 600; margin-top: 3px; }
+
+.col-consulta { min-width: 130px; }
+
+.consulta-data {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 3px;
+}
+
+/* ===== VOLTAR PARA MÉDICOS ===== */
+.btn-voltar-medicos {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0 0 4px 0;
+  transition: color 0.15s;
+  font-family: inherit;
+}
+
+.btn-voltar-medicos:hover { color: #111827; }
+
+/* ===== TÍTULO PACIENTES DO MÉDICO ===== */
+.pacientes-medico-titulo {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+.pacientes-medico-titulo h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.pacientes-medico-titulo p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* ===== MODAL ===== */
+#modalMedico,
+#modalPaciente {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+#modalMedico.ativo,
+#modalPaciente.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-box {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(12px);
+  transition: transform 0.25s ease;
+}
+
+#modalMedico.ativo .modal-box,
+#modalPaciente.ativo .modal-box {
+  transform: translateY(0);
+}
+
+.modal-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.modal-sub {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+.modal-campo { margin-bottom: 14px; }
+
+.modal-campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.modal-campo input,
+.modal-campo select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.modal-campo input:focus,
+.modal-campo select:focus {
+  border-color: #a5b4fc;
+  background: #fff;
+}
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.btn-cancelar {
+  padding: 9px 20px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.btn-cancelar:hover { background: #f3f4f6; }
+
+.btn-cadastrar {
+  padding: 9px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.btn-cadastrar:hover { background: #4338ca; }
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  text-align: center;
+  padding: 20px 10%;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 640px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-box {
+    margin: 0 16px;
+    padding: 24px;
+  }
+}
