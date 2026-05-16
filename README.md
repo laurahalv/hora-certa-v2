@@ -103,7 +103,7 @@ Adicionar screenshots aqui:
 
 desenvolvido por:
 
-**Larissa**
+- **Larissa**
 - **Natalia**
 - **Maycon**
 
@@ -112,7 +112,7 @@ desenvolvido por:
 
 Projeto desenvolvido por:
 
-**Laura Halv**
+- **Laura Halv**
 - **Pedro Otavio Santos Da Silva**
 - **Luis**
 
