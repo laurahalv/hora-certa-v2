@@ -1,0 +1,166 @@
+/* FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #1C279C;
+    --secondary-color: #061521;
+    --third-color: #3A6D8C;
+    --text-color-white: #FFFFFF;
+    --text-color-black: #000000;
+    --border-radius: 4px;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color-white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10%;
+    height: 11vh;
+}
+
+.header-introduce {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 80px;
+    height: auto;
+}
+
+.header-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.header-perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-perfil p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.header-perfil .perfil-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header-perfil img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+
+}
+
+.header-perfil img:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* LINKS - HEADER */
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.header-link {
+    color: var(--text-color-white);
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    transition: transform 0.3s ease;
+    transform: scale(1.1);
+    
+}
+
+/* MAIN */ 
+
+.container {
+    padding: 20px 10%;
+}
+
+.observacoes-container{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.title{
+    font-size:25px;
+    font-weight:500;
+    margin-bottom:20px;
+}   
+
+.card{
+    border:1px solid #666;
+    border-radius:15px;
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+
+    background:#f5f5f5;
+}
+
+.card-conteudo{
+    display:flex;
+    gap:20px;
+}
+
+.card-icone{
+    font-size:35px;
+    color:#2962ff;
+}
+
+.card-texto{
+    font-size:22px;
+}
+
+.card-inferior{
+    display:flex;
+    gap:20px;
+    color:#888;
+    font-size:14px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  text-align: center;
+  padding: 20px 10%;
+  width: 100%;
+  margin-top: auto;
+}
+
