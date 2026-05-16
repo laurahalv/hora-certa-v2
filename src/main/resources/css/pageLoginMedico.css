@@ -1,0 +1,248 @@
+/* FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #1C279C;
+    --secondary-color: #061521;
+    --third-color: #3A6D8C;
+    --text-color-white: #FFFFFF;
+    --text-color-black: #000000;
+    --border-radius: 4px;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+/* MAIN */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.container-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    color: var(--text-color-white);
+    background-color: var(--primary-color);
+}
+
+.logo-image {
+    width: 200px;
+    height: auto;
+}
+
+.logo-image img {
+    width: 100%;
+    height: auto;
+}
+
+.container-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    background-color: var(--secondary-color);
+}
+
+.container-form h1 {
+    color: var(--text-color-white);
+    margin-bottom: 20px;
+}
+
+.btnLogins {
+    width: 400px;
+    height: 40px;
+    margin: 10px;
+    background-color: var(--third-color);
+    color: var(--text-color-white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnLogins:hover {
+    background-color: var(--primary-color);
+}
+
+.container-form label {
+    color: var(--text-color-white);
+    margin-bottom: 8px;
+    text-align: left;
+    width: 400px;
+}
+
+.container-form input {
+    width: 400px;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius);
+}
+
+/* ================================
+   RESPONSIVIDADE — Login Page
+   ================================ */
+
+/* ── TABLET  (até 1024px) ── */
+@media (max-width: 1024px) {
+
+    .logo-image {
+        width: 160px;
+    }
+
+    .btnLogins,
+    .container-form label,
+    .container-form input {
+        width: 300px;
+        font-size: 16px;
+    }
+}
+
+/* ── MOBILE GRANDE  (até 768px) ── */
+@media (max-width: 768px) {
+
+    /* Empilha as duas metades verticalmente */
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* Lado da imagem vira faixa no topo */
+    .container-image {
+        width: 100%;
+        height: auto;
+        min-height: 180px;
+        padding: 24px 20px;
+    }
+
+    .logo-image {
+        width: 120px;
+    }
+
+    /* Formulário ocupa o restante */
+    .container-form {
+        width: 100%;
+        height: auto;
+        flex: 1;
+        padding: 40px 24px;
+    }
+
+    .container-form h1 {
+        font-size: 1.6em;
+        margin-bottom: 16px;
+    }
+
+    /* Inputs, labels e botão — largura fluida */
+    .container-form label,
+    .container-form input,
+    .btnLogins {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .btnLogins {
+        font-size: 16px;
+        height: 44px;
+        margin: 8px 0;
+    }
+
+    .container-form input {
+        height: 44px;
+        font-size: 15px;
+    }
+}
+
+/* ── MOBILE PEQUENO  (até 480px) ── */
+@media (max-width: 480px) {
+
+    .container-image {
+        min-height: 150px;
+        padding: 16px;
+    }
+
+    .logo-image {
+        width: 100px;
+    }
+
+    .container-form {
+        padding: 32px 16px;
+    }
+
+    .container-form h1 {
+        font-size: 1.3em;
+        margin-bottom: 14px;
+    }
+
+    .container-form label,
+    .container-form input,
+    .btnLogins {
+        max-width: 100%;
+    }
+
+    .btnLogins {
+        font-size: 15px;
+        height: 42px;
+    }
+
+    .container-form input {
+        height: 42px;
+        font-size: 14px;
+    }
+}
+
+/* ── MOBILE MUITO PEQUENO  (até 360px) ── */
+@media (max-width: 360px) {
+
+    .container-image {
+        min-height: 130px;
+        padding: 12px;
+    }
+
+    .logo-image {
+        width: 85px;
+    }
+
+    .container-form {
+        padding: 24px 12px;
+    }
+
+    .container-form h1 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+
+    .btnLogins {
+        font-size: 14px;
+        height: 40px;
+        margin: 6px 0;
+    }
+
+    .container-form input {
+        height: 40px;
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+
+    .container-form label {
+        font-size: 13px;
+    }
+}
