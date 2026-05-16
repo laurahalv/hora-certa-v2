@@ -1,0 +1,266 @@
+/* FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #1C279C;
+    --secondary-color: #061521;
+    --third-color: #3A6D8C;
+    --text-color-white: #FFFFFF;
+    --text-color-black: #000000;
+    --border-radius: 4px;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color-white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10%;
+    height: 11vh;
+}
+
+.header-introduce {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 80px;
+    height: auto;
+}
+
+.header-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.header-perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-perfil p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.header-perfil .perfil-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header-perfil img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+
+}
+
+.header-perfil img:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* LINKS - HEADER */
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.header-link {
+    color: var(--text-color-white);
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    transition: transform 0.3s ease;
+    transform: scale(1.1);
+    
+}
+
+
+
+/* MAIN */
+
+.container h2 {
+    color: var(--text-color-black);
+    margin-bottom: 10px;
+}
+
+
+
+.container {
+    padding: 20px 10%;
+}
+
+
+/* FORMULARIO CNPJ */
+
+.container .container-form-DataMedico {
+  background-color: white;
+  border: 1px solid var(--text-color-black);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  color: var(--text-color-white);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.container .container-form-DataMedico .form-DataMedico {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-DataMedico h3 {
+  margin-bottom: 15px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-DataMedico input[type="text"],
+.container .container-form-DataMedico input[type="number"],
+.container .container-form-DataMedico input[type="email"],
+.container .container-form-DataMedico input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--text-color-black);
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+.container .container-form-DataMedico button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+/* FORMULARIO NOTIFICAÇÃO */
+
+.container .container-form-notificacao {
+  background-color: white;
+  border: 1px solid var(--text-color-black);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  color: var(--text-color-white);
+  width: 100%;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.container .container-form-notificacao .form-notificacao {
+  display: block;
+  margin-bottom: 5px;
+
+}
+
+.container .container-form-notificacao h3 {
+  margin-bottom: 15px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-notificacao input[type="text"],
+.container .container-form-notificacao input[type="email"],
+.container .container-form-notificacao input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--text-color-black);
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+.container .container-form-notificacao button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.container .container-form-notificacao .item-notificacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--text-color-black);
+  padding-bottom: 6px;
+}
+
+/* FORMULARIO SEGURANÇA */
+
+.container .container-form-seguranca {
+  background-color: white;
+  border: 1px solid var(--text-color-black);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  color: var(--text-color-white);
+  width: 100%;
+}
+
+.container .container-form-seguranca .form-seguranca {
+  display: block;
+  color: var(--text-color-black);
+}
+
+.container .container-form-seguranca h3 {
+  margin-bottom: 15px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-seguranca input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--text-color-black);
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+.container .container-form-seguranca button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  text-align: center;
+  padding: 20px 10%;
+  width: 100%;
+  margin-top: auto;
+}

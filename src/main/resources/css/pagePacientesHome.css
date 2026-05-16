@@ -1,0 +1,634 @@
+/* FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #1C279C;
+    --secondary-color: #061521;
+    --third-color: #3A6D8C;
+    --text-color-white: #FFFFFF;
+    --text-color-black: #000000;
+    --border-radius: 4px;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color-white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10%;
+    height: 11vh;
+}
+
+.header-introduce {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 80px;
+    height: auto;
+}
+
+.header-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.header-perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-perfil p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.header-perfil .perfil-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header-perfil img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+
+}
+
+.header-perfil img:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* LINKS - HEADER */
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.header-link {
+    color: var(--text-color-white);
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    transition: transform 0.3s ease;
+    transform: scale(1.1);
+    
+}
+
+/* MAIN*/
+
+.dashboard-container {
+    padding: 20px 10%;
+    flex: 1;
+}
+
+/* ===== DASHBOARD PACIENTE ===== */
+.medicamento-data {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+}
+
+/* Grids */
+.dash-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.dash-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Card base */
+.dash-card {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeUp 0.3s ease both;
+}
+
+.dash-card-center { justify-content: space-between; }
+
+.dash-card-label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* Adesão */
+.dash-adesao-valor {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.dash-card-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Próximos */
+.dash-prox-numero {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.dash-ver-todos {
+  font-size: 13px;
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.dash-ver-todos:hover { text-decoration: underline; }
+
+/* Médico */
+.dash-medico-nome {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+/* ===== ATALHOS ===== */
+.dash-atalho {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+
+.dash-atalho:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-color: #c7d2fe;
+}
+
+.dash-atalho-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-icone-azul  { background: #ede9fe; }
+.dash-icone-verde { background: #dcfce7; }
+
+.dash-atalho-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dash-atalho-sub {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* ===== SEÇÃO TÍTULO ===== */
+.dash-secao-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+/* ===== TABELA HISTÓRICO ===== */
+.dash-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dash-tabela th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ca3af;
+  padding: 6px 8px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dash-tabela td {
+  padding: 10px 8px;
+  color: #374151;
+  border-bottom: 1px solid #f9fafb;
+  vertical-align: middle;
+}
+
+.dash-tabela tr:last-child td { border-bottom: none; }
+
+.dash-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ===== NÃO TOMADOS ===== */
+.dash-nao-tomados-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dash-nao-tomado-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.dash-nao-tomado-nome {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dash-nao-tomado-info {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.dash-nao-tomado-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.dash-btn-atraso,
+.dash-btn-tomado {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+.dash-btn-atraso {
+  background: #fef9c3;
+  color: #d97706;
+}
+
+.dash-btn-tomado {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.dash-btn-atraso:hover,
+.dash-btn-tomado:hover { opacity: 0.8; }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .dash-grid-3,
+  .dash-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ===== PRÓXIMOS MEDICAMENTOS ===== */
+.proximos-medicamentos {
+  padding: 8px 0;
+}
+
+.prox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.prox-titulo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.btn-registrar-dose {
+  background: #1c279c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-registrar-dose:hover { background: #3a6d8c; }
+
+/* Lista */
+.prox-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Card */
+.prox-card {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  animation: fadeUp 0.3s ease both;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.prox-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border-color: #c7d2fe;
+}
+
+/* Esquerda */
+.prox-card-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.prox-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #ede9fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prox-nome {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.prox-dose {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.prox-frequencia {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 1px;
+}
+
+/* Direita */
+.prox-card-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.prox-horario {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1c279c;
+}
+
+.btn-marcar-tomado {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.btn-marcar-tomado:hover:not(:disabled) { background: #16a34a; }
+.btn-marcar-tomado:disabled { cursor: default; }
+
+.proximos-medicamentos {
+  padding: 8px 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ===== MODAL REGISTRAR DOSE ===== */
+#modalRegistrarDose {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+#modalRegistrarDose.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#modalRegistrarDose .modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-box-dose {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(12px);
+  transition: transform 0.25s ease;
+}
+
+#modalRegistrarDose.ativo .modal-box-dose {
+  transform: translateY(0);
+}
+
+.modal-box-dose h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.modal-box-dose .modal-campo {
+  margin-bottom: 16px;
+}
+
+.modal-box-dose .modal-campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.modal-box-dose .modal-campo input,
+.modal-box-dose .modal-campo select,
+.modal-box-dose .modal-campo textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  resize: none;
+}
+
+.modal-box-dose .modal-campo input:focus,
+.modal-box-dose .modal-campo select:focus,
+.modal-box-dose .modal-campo textarea:focus {
+  border-color: #a5b4fc;
+  background: #fff;
+}
+
+.modal-box-dose .modal-campo textarea {
+  line-height: 1.5;
+}
+
+/* Ações */
+.modal-dose-acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.btn-dose-registrar {
+  flex: 1;
+  padding: 11px;
+  background: #1c279c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-dose-registrar:hover { background: #3a6d8c; }
+
+.btn-dose-cancelar {
+  flex: 1;
+  padding: 11px;
+  background: #fff;
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-dose-cancelar:hover { background: #f3f4f6; }
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .prox-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .prox-card-direita {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .btn-marcar-tomado { width: 100%; justify-content: center; }
+}
+
+
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  text-align: center;
+  padding: 20px 10%;
+  width: 100%;
+  margin-top: auto;
+}
