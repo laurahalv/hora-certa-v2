@@ -104,8 +104,8 @@ Adicionar screenshots aqui:
 desenvolvido por:
 
 **Larissa**
-**Natalia**
-**Maycon**
+- **Natalia**
+- **Maycon**
 
 
 ## 👥 Desenvolvedores
@@ -113,8 +113,8 @@ desenvolvido por:
 Projeto desenvolvido por:
 
 **Laura Halv**
-**Pedro Otavio Santos Da Silva**
-**Luis**
+- **Pedro Otavio Santos Da Silva**
+- **Luis**
 
 ---
 
