@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pageMedicosConfig.css" />
+    <script defer src="../../js/pageMedicosConfig.js"></script>
+    <title>Medicos | Config</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-introduce">
+        <div class="header-logo">
+          <img src="../img/icon_convertido.svg" class="logo" alt="Logo Hora Certa" />
+        </div>
+
+        <div class="title">
+          <h1>Hora Certa</h1>
+        </div>
+      </div>
+
+      <div class="header-perfil">
+        <div class="perfil-info">
+          <p>Dr. João Silva</p>
+        </div>
+        <div class="perfil-image">
+          <img
+            src="../img/pageMedicoHomeProfile.png"
+            alt="Foto de Perfil do Médico"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="dashboard">
+        <h2>Configurações</h2>
+      </section>
+      <section class="container-form-DataMedico">
+        <form class="form-DataMedico">
+          <h3>Configurações do Médico</h3>
+          <label for="nome">Nome do Médico:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Digite o Nome Completo"
+            required
+          />
+          <label for="especialidade">Especialidade</label>
+          <input
+            type="text"
+            id="especialidade"
+            name="especialidade"
+            placeholder="Digite a Especialidade"
+            required
+          />
+          <label for="cpf">CPF do Médico:</label>
+          <input
+            type="number"
+            id="cpf"
+            name="cpf"
+            placeholder="Digite o CPF do médico"
+            required
+          />
+          <label for="email">Email do Médico:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite o Email do Médico"
+            required
+          />
+          <label for="telefone">Telefone:</label>
+          <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            placeholder="Digite o Telefone do Médico"
+            required
+          />
+          <label for="endereco">Endereço do Médico:</label>
+          <input
+            type="text"
+            id="endereco"
+            name="endereco"
+            placeholder="Rua, Número, Bairro"
+            required
+          />
+
+          <button type="submit">Salvar</button>
+        </form>
+      </section>
+
+      <section class="container-form-notificacao">
+        <form class="form-notificacao">
+          <h3>Notificações</h3>
+          <div class="item-notificacao">
+            <div class="texto">
+              <h4>Notificações por Email</h4>
+            </div>
+
+            <label class="switch">
+              <input id="notificacao-email" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="item-notificacao">
+            <div class="texto">
+              <h4>Notificações Push</h4>
+            </div>
+
+            <label class="switch">
+              <input id="notificacao-push" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="item-notificacao">
+            <div class="texto">
+              <h4>Lembrete Antecipado</h4>
+            </div>
+
+            <label class="switch">
+              <input id="lembrete-antecipado" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <button type="submit">Salvar</button>
+        </form>
+      </section>
+
+      <section class="container-form-seguranca">
+        <form class="form-seguranca">
+          <h3>Configurações de Segurança</h3>
+          <label for="senha-atual">Senha Atual:</label>
+          <input
+            type="password"
+            id="senha-atual"
+            name="senha-atual"
+            placeholder="Digite a senha atual"
+            required
+          />
+          <label for="nova-senha">Nova Senha:</label>
+          <input
+            type="password"
+            id="nova-senha"
+            name="nova-senha"
+            placeholder="Digite a nova senha"
+            required
+          />
+          <label for="confirmar-senha">Confirmar Nova Senha:</label>
+          <input
+            type="password"
+            id="confirmar-senha"
+            name="confirmar-senha"
+            placeholder="Confirme a nova senha"
+            required
+          />
+          <button type="submit">Salvar</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Hora Certa. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

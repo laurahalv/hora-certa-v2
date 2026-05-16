@@ -71,7 +71,7 @@ header {
   transform: scale(1.1);
 }
 
-/* MAIN */
+/* MAIN */ 
 .container {
   padding: 20px 10%;
   flex: 1; /* empurra o footer para baixo */
@@ -81,7 +81,7 @@ header {
   margin-bottom: 20px;
 }
 
-/* FORMULARIO CNPJ */
+/* FORMULARIO CNPJ */ 
 
 .container .container-form-cnpj {
   background-color: white;
@@ -95,8 +95,7 @@ header {
 
 .container .container-form-cnpj .form-cnpj {
   display: block;
-  margin-bottom: 5px;
-  color: var(--text-color-black);
+  margin-bottom: 5px;  color: var(--text-color-black);
 }
 
 .container .container-form-cnpj h3 {
@@ -136,7 +135,7 @@ header {
 
 .container .container-form-perfil .form-perfil {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 5px; 
   color: var(--text-color-black);
 }
 

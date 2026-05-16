@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pageMedicosHome.css" />
+    <title>Medicos | Home</title>
+    <script defer src="../../js/pageMedicosHome.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-introduce">
+        <div class="header-logo">
+          <img src="../img/icon_convertido.svg" class="logo" alt="Logo Hora Certa" />
+        </div>
+
+        <div class="title">
+          <h1>Hora Certa</h1>
+        </div>
+      </div>
+
+      <div class="header-perfil">
+        <div class="perfil-info">
+          <p>Dr. João Silva</p>
+        </div>
+        <div class="perfil-image">
+          <img src="../img/pageMedicoHomeProfile.png" alt="Foto de Perfil do Médico" />
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-container">
+      <section class="dashboard">
+        <h2>Pacientes</h2>
+        <div class="addPaciente">
+          <p>Gerencie os pacientes cadastrados na clínica</p>
+          <button type="submit" class="btn">Adicionar Pacientes</button>
+        </div>
+      </section>
+
+      <!-- Input de pesquisa  -->
+      <div class="searchInput">
+        <input type="text" placeholder="Pesquisar nome ou email..." />
+        <select name="medico" id="filtroMedico">
+          <option value="">Todos os médicos</option>
+          <option value="1">Dr. João</option>
+          <option value="2">Dra. Maria</option>
+          <option value="3">Dr. Pedro</option>
+          <option value="4">Dra. Ana</option>
+        </select>
+      </div>
+
+
+      <div class="tab-list">
+        <!-- Tabs para filtrar por status -->
+      </div>
+
+
+      <div id="tela-lista">
+        <div class="cards-container">
+          <!-- Cards de pacientes serão renderizados aqui via JavaScript -->
+        </div>
+      </div>
+
+      <div id="tela-detalhe" style="display: none"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Hora Certa. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>
