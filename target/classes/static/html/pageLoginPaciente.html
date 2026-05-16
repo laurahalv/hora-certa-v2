@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pageLoginPaciente.css" />
+    <title>Login Paciente</title>
+  </head>
+  <body>
+    <main class="container">
+      <section class="container-image">
+        <div class="logo-image">
+          <img src="../img/icon_convertido.svg" alt="Logo Hora Certa" />
+        </div>
+        <h1>Hora Certa!</h1>
+      </section>
+      <section class="container-form">
+        <h1>Login Paciente</h1>
+        <label for="email-paciente">Email:</label>
+        <input
+          type="email"
+          id="email-paciente"
+          name="email-paciente"
+          placeholder="Digite seu email"
+          required
+        />
+
+        <label for="senha-paciente">Senha:</label>
+        <input
+          type="password"
+          id="senha-paciente"
+          name="senha-paciente"
+          placeholder="Digite sua senha"
+          required
+        />
+
+        <button class="btnLogins" type="button">
+          Entrar
+        </button>
+      </section>
+    </main>
+
+    <script>
+      document
+        .querySelector(".btnLogins")
+        .addEventListener("click", async function () {
+          const email = document.getElementById("email-paciente").value.trim();
+          const senha = document.getElementById("senha-paciente").value.trim();
+
+          if (!email || !senha) {
+            alert("Por favor, preencha todos os campos obrigatórios");
+            return;
+          }
+
+          try {
+            const response = await fetch("http://localhost:8080/api/pacientes/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                senha: senha,
+              }),
+            });
+
+            if (response.ok) {
+              alert("Login realizado com sucesso!");
+              window.location.href = "/src/main/resources/static/html/pagePacientesHome.html";
+            } else {
+              const error = await response.json();
+              alert(error.message || "Erro ao realizar login");
+            }
+          } catch (error) {
+            console.error("Erro ao realizar login:", error);
+            alert("Ocorreu um erro ao tentar realizar o login");
+          }
+        });
+    </script>
+  </body>
+</html>
