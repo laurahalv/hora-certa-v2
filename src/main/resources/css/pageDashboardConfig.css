@@ -71,6 +71,138 @@ header {
   transform: scale(1.1);
 }
 
+/* MAIN */
+.container {
+  padding: 20px 10%;
+  flex: 1; /* empurra o footer para baixo */
+}
+
+.container .dashboard {
+  margin-bottom: 20px;
+}
+
+/* FORMULARIO CNPJ */
+
+.container .container-form-cnpj {
+  background-color: white;
+  border: 1px solid var(--text-color-black);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  color: var(--text-color-white);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.container .container-form-cnpj .form-cnpj {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-cnpj h3 {
+  margin-bottom: 15px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-cnpj input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--text-color-black);
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+.container .container-form-cnpj button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+/* FORMULARIO PERFIL */
+
+.container .container-form-perfil {
+  background-color: white;
+  border: 1px solid var(--text-color-black);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  color: var(--text-color-white);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.container .container-form-perfil .form-perfil {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-perfil h3 {
+  margin-bottom: 15px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-perfil input[type="text"],
+.container .container-form-perfil input[type="email"],
+.container .container-form-perfil input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--text-color-black);
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+.container .container-form-perfil button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+/* FORMULARIO SEGURANÇA */
+
+.container .container-form-seguranca {
+  background-color: white;
+  border: 1px solid var(--text-color-black);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  color: var(--text-color-white);
+  width: 100%;
+}
+
+.container .container-form-seguranca .form-seguranca {
+  display: block;
+  color: var(--text-color-black);
+}
+
+.container .container-form-seguranca h3 {
+  margin-bottom: 15px;
+  color: var(--text-color-black);
+}
+
+.container .container-form-seguranca input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--text-color-black);
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+.container .container-form-seguranca button {
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
 
 /* ===== FOOTER ===== */
 footer {
