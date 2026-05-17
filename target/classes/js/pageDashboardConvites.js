@@ -1,50 +1,51 @@
 // ===== DADOS DOS CONVITES =====
-const convites = [
-  {
-    id: 1,
-    email: "dr.ricardo@email.com",
-    status: "Expirado",
-    enviadoPor: "Administrador Clínica",
-    data: "14/03/2026",
-    tipo: "Médico"
-  },
-  {
-    id: 2,
-    email: "dra.patricia@email.com",
-    status: "Expirado",
-    enviadoPor: "Administrador Clínica",
-    data: "17/03/2026",
-    tipo: "Médico"
-  },
-  {
-    id: 3,
-    email: "lucas.ferreira@email.com",
-    status: "Aceito",
-    enviadoPor: "Dr. Carlos Silva",
-    data: "09/03/2026",
-    tipo: "Paciente"
-  },
-  {
-    id: 4,
-    email: "camila.rodrigues@email.com",
-    status: "Pendente",
-    enviadoPor: "Dra. Maria Santos",
-    data: "27/02/2026",
-    tipo: "Paciente"
+let convites = [];
+
+// ===== CARREGAR CONVITES DA CLÍNICA =====
+document.addEventListener("DOMContentLoaded", function () {
+  carregarConvites();
+});
+
+function carregarConvites() {
+  const clinicaId = localStorage.getItem("clinicaId");
+
+  if (!clinicaId) {
+    console.error("Clínica não identificada");
+    return;
   }
-];
+
+  fetch(`http://localhost:8080/api/convites/clinica/${clinicaId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      convites = data;
+      renderizarResumo();
+      renderizarTabs();
+      filtrarConvites("Todos");
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar convites:", error);
+    });
+}
 
 // ===== FILTRO ATIVO =====
 let filtroAtivo = "Todos";
 
-
 // ===== CONFIGURAÇÕES POR STATUS =====
 function configStatus(status) {
   switch (status) {
-    case "Pendente":  return { cor: "#f59e0b", bg: "#fef9c3", icone: iconePendente() };
-    case "Aceito":    return { cor: "#22c55e", bg: "#dcfce7", icone: iconeAceito() };
-    case "Expirado":  return { cor: "#ef4444", bg: "#fee2e2", icone: iconeExpirado() };
-    default:          return { cor: "#9ca3af", bg: "#f3f4f6", icone: "" };
+    case "Pendente":
+      return { cor: "#f59e0b", bg: "#fef9c3", icone: iconePendente() };
+    case "Aceito":
+      return { cor: "#22c55e", bg: "#dcfce7", icone: iconeAceito() };
+    case "Expirado":
+      return { cor: "#ef4444", bg: "#fee2e2", icone: iconeExpirado() };
+    default:
+      return { cor: "#9ca3af", bg: "#f3f4f6", icone: "" };
   }
 }
 
@@ -64,7 +65,6 @@ function iconeSend() {
   return `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
 }
 
-
 // ===== BOTÕES DE AÇÃO =====
 function botoesAcao(convite) {
   if (convite.status === "Expirado") {
@@ -80,7 +80,6 @@ function botoesAcao(convite) {
   }
   return ""; // Aceito não tem botões
 }
-
 
 // ===== CRIA ITEM DA LISTA =====
 function criarItemConvite(convite) {
@@ -113,12 +112,11 @@ function criarItemConvite(convite) {
   return item;
 }
 
-
 // ===== RENDERIZA RESUMO (3 cards do topo) =====
 function renderizarResumo() {
-  const pendentes = convites.filter(c => c.status === "Pendente").length;
-  const aceitos   = convites.filter(c => c.status === "Aceito").length;
-  const expirados = convites.filter(c => c.status === "Expirado").length;
+  const pendentes = convites.filter((c) => c.status === "Pendente").length;
+  const aceitos = convites.filter((c) => c.status === "Aceito").length;
+  const expirados = convites.filter((c) => c.status === "Expirado").length;
 
   const resumo = document.getElementById("resumo-convites");
   if (!resumo) return;
@@ -150,33 +148,35 @@ function renderizarResumo() {
   `;
 }
 
-
 // ===== RENDERIZA TABS =====
 function renderizarTabs() {
-  const total     = convites.length;
-  const pendentes = convites.filter(c => c.status === "Pendente").length;
-  const aceitos   = convites.filter(c => c.status === "Aceito").length;
-  const expirados = convites.filter(c => c.status === "Expirado").length;
+  const total = convites.length;
+  const pendentes = convites.filter((c) => c.status === "Pendente").length;
+  const aceitos = convites.filter((c) => c.status === "Aceito").length;
+  const expirados = convites.filter((c) => c.status === "Expirado").length;
 
   const tabs = [
-    { label: "Todos",     count: total,     valor: "Todos" },
+    { label: "Todos", count: total, valor: "Todos" },
     { label: "Pendentes", count: pendentes, valor: "Pendente" },
-    { label: "Aceitos",   count: aceitos,   valor: "Aceito" },
-    { label: "Expirados", count: expirados, valor: "Expirado" }
+    { label: "Aceitos", count: aceitos, valor: "Aceito" },
+    { label: "Expirados", count: expirados, valor: "Expirado" },
   ];
 
   const tabsContainer = document.getElementById("convites-tabs");
   if (!tabsContainer) return;
 
-  tabsContainer.innerHTML = tabs.map(tab => `
+  tabsContainer.innerHTML = tabs
+    .map(
+      (tab) => `
     <button
-      class="tab-btn ${filtroAtivo === tab.valor ? 'tab-ativa' : ''}"
+      class="tab-btn ${filtroAtivo === tab.valor ? "tab-ativa" : ""}"
       onclick="filtrarConvites('${tab.valor}')">
       ${tab.label} (${tab.count})
     </button>
-  `).join("");
+  `,
+    )
+    .join("");
 }
-
 
 // ===== RENDERIZA LISTA DE CONVITES =====
 function renderizarConvites(lista) {
@@ -190,32 +190,70 @@ function renderizarConvites(lista) {
     return;
   }
 
-  lista.forEach(c => container.appendChild(criarItemConvite(c)));
+  lista.forEach((c) => container.appendChild(criarItemConvite(c)));
 }
-
 
 // ===== FILTRAR =====
 function filtrarConvites(status) {
   filtroAtivo = status;
 
-  const lista = status === "Todos"
-    ? convites
-    : convites.filter(c => c.status === status);
+  const lista =
+    status === "Todos" ? convites : convites.filter((c) => c.status === status);
 
   renderizarTabs();
   renderizarConvites(lista);
 }
 
-
 // ===== AÇÕES =====
 function cancelarConvite(id) {
-  console.log("Cancelar convite:", id);
-  // fetch DELETE /api/convites/:id
+  if (!confirm("Tem certeza que deseja cancelar este convite?")) {
+    return;
+  }
+
+  fetch(`http://localhost:8080/api/convites/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Convite cancelado com sucesso");
+        carregarConvites();
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao cancelar convite:", error);
+      alert("Erro ao cancelar convite");
+    });
 }
 
 function reenviarConvite(id) {
-  console.log("Reenviar convite:", id);
-  // fetch POST /api/convites/:id/reenviar
+  const convite = convites.find((c) => c.id === id);
+  if (!convite) return;
+
+  const statusRequest = {
+    status: "PENDENTE",
+  };
+
+  fetch(`http://localhost:8080/api/convites/${id}/status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(statusRequest),
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Convite reenviado com sucesso");
+        carregarConvites();
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao reenviar convite:", error);
+      alert("Erro ao reenviar convite");
+    });
 }
 
 // ===== MODAL — NOVO CONVITE =====
@@ -282,40 +320,51 @@ function fecharModalConvite() {
 
 // Mostra/esconde campo especialidade conforme tipo
 function alterarTipoConvite() {
-  const tipo   = document.getElementById("convTipo").value;
-  const campo  = document.getElementById("campoEspecialidade");
+  const tipo = document.getElementById("convTipo").value;
+  const campo = document.getElementById("campoEspecialidade");
   campo.style.display = tipo === "Medico" ? "block" : "none";
 }
 
 async function enviarConvite() {
-  const dados = {
-    tipo:          document.getElementById("convTipo").value,
-    email:         document.getElementById("convEmail").value.trim(),
-    especialidade: document.getElementById("convEspecialidade")?.value.trim() || ""
-  };
+  const clinicaId = localStorage.getItem("clinicaId");
+  const clinicaNome = localStorage.getItem("clinicaNome");
 
-  if (!dados.email) {
+  const tipoSelecionado = document.getElementById("convTipo").value;
+  const email = document.getElementById("convEmail").value.trim();
+
+  if (!email) {
     alert("Informe o e-mail do destinatário.");
     return;
   }
 
+  // Mapear tipo do modal para enum do backend
+  const tipo = tipoSelecionado === "Medico" ? "MEDICO" : "PACIENTE";
+
   try {
-    const response = await fetch("/api/convites", {
+    const url = new URL("http://localhost:8080/api/convites");
+    url.searchParams.append("clinicaId", clinicaId);
+    url.searchParams.append("email", email);
+    url.searchParams.append("tipo", tipo);
+    url.searchParams.append("enviadoPor", clinicaNome);
+
+    const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dados)
     });
 
     if (response.ok) {
+      alert("Convite enviado com sucesso!");
       fecharModalConvite();
-      renderizarResumo();
-      renderizarTabs();
-      renderizarConvites(convites);
+      carregarConvites();
     } else {
-      alert("Erro ao enviar convite.");
+      const errorData = await response.json();
+      alert(
+        "Erro ao enviar convite: " + (errorData.message || "Tente novamente"),
+      );
     }
   } catch (err) {
     console.error("Erro:", err);
+    alert("Erro na requisição: " + err.message);
   }
 }
 
@@ -324,10 +373,3 @@ const btnNovoConvite = document.querySelector(".addConvite .btn");
 if (btnNovoConvite) {
   btnNovoConvite.addEventListener("click", abrirModalConvite);
 }
-
-
-
-// ===== INICIA =====
-renderizarResumo();
-renderizarTabs();
-renderizarConvites(convites);

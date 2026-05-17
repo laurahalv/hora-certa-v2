@@ -18,7 +18,6 @@
     font-family: var(--font-family);
 }
 
-
 body {
   min-height: 100vh;
   display: flex;
@@ -26,7 +25,6 @@ body {
 }
 
 /* HEADER */
-
 header {
     background-color: var(--primary-color);
     color: var(--text-color-white);
@@ -74,7 +72,6 @@ header {
     width: 100%;
     height: auto;
     border-radius: 50%;
-
 }
 
 .header-perfil img:hover {
@@ -100,28 +97,20 @@ header {
 .header-link:hover {
     transition: transform 0.3s ease;
     transform: scale(1.1);
-    
 }
 
-
-
 /* MAIN */
-
 .container h2 {
     color: var(--text-color-black);
     margin-bottom: 10px;
 }
 
-
-
 .container {
     padding: 20px 10%;
 }
 
-
-/* FORMULARIO CNPJ */
-
-.container .container-form-DataMedico {
+/* FORMULARIO PACIENTE (CORRIGIDO PARA O NOVO HTML) */
+.container .container-form-DataPaciente {
   background-color: white;
   border: 1px solid var(--text-color-black);
   padding: 20px;
@@ -131,30 +120,31 @@ header {
   margin-bottom: 20px;
 }
 
-.container .container-form-DataMedico .form-DataMedico {
+.container .container-form-DataPaciente .form-DataPaciente {
   display: block;
   margin-bottom: 5px;
   color: var(--text-color-black);
 }
 
-.container .container-form-DataMedico h3 {
+.container .container-form-DataPaciente h3 {
   margin-bottom: 15px;
   color: var(--text-color-black);
 }
 
-.container .container-form-DataMedico input[type="text"],
-.container .container-form-DataMedico input[type="number"],
-.container .container-form-DataMedico input[type="email"],
-.container .container-form-DataMedico input[type="tel"] {
+/* Ajustado os seletores para englobar input[type="text"] do CPF e endereço */
+.container .container-form-DataPaciente input[type="text"],
+.container .container-form-DataPaciente input[type="email"],
+.container .container-form-DataPaciente input[type="tel"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid var(--text-color-black);
   border-radius: var(--border-radius);
   outline: none;
+  color: var(--text-color-black);
 }
 
-.container .container-form-DataMedico button {
+.container .container-form-DataPaciente button {
   background-color: var(--primary-color);
   color: var(--text-color-white);
   border: none;
@@ -164,13 +154,11 @@ header {
 }
 
 /* FORMULARIO NOTIFICAÇÃO */
-
 .container .container-form-notificacao {
   background-color: white;
   border: 1px solid var(--text-color-black);
   padding: 20px;
   border-radius: var(--border-radius);
-  color: var(--text-color-white);
   width: 100%;
   margin-bottom: 20px;
   color: black;
@@ -179,23 +167,11 @@ header {
 .container .container-form-notificacao .form-notificacao {
   display: block;
   margin-bottom: 5px;
-
 }
 
 .container .container-form-notificacao h3 {
   margin-bottom: 15px;
   color: var(--text-color-black);
-}
-
-.container .container-form-notificacao input[type="text"],
-.container .container-form-notificacao input[type="email"],
-.container .container-form-notificacao input[type="tel"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid var(--text-color-black);
-  border-radius: var(--border-radius);
-  outline: none;
 }
 
 .container .container-form-notificacao button {
@@ -217,13 +193,11 @@ header {
 }
 
 /* FORMULARIO SEGURANÇA */
-
 .container .container-form-seguranca {
   background-color: white;
   border: 1px solid var(--text-color-black);
   padding: 20px;
   border-radius: var(--border-radius);
-  color: var(--text-color-white);
   width: 100%;
 }
 

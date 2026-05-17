@@ -1,17 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/pagePacientesHome.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pagePacientesHome.css" />
     <title>Pacientes | Home</title>
     <script defer src="../../js/pagePacientesHome.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
       <div class="header-introduce">
         <div class="header-logo">
-          <img src="../img/icon_convertido.svg" class="logo" alt="Logo Hora Certa" />
+          <img
+            src="../img/icon_convertido.svg"
+            class="logo"
+            alt="Logo Hora Certa"
+          />
         </div>
 
         <div class="title">
@@ -19,34 +23,42 @@
         </div>
       </div>
 
-        <div class="header-links">
+      <div class="header-links">
         <a href="#" class="header-link">Dashboard</a>
         <a href="pagePacientesObs.html" class="header-link">Observações</a>
         <a href="pagePacientesConfig.html" class="header-link">Configurações</a>
       </div>
     </header>
 
-
     <main class="dashboard-container">
-        <div class="paciente-data">
-            <h1 class="paciente-title">Paciente</h1>
-        </div>
+      <div class="paciente-data">
+        <h1 class="paciente-title">
+          Olá, <span id="loggedPacienteNome">Carregando...</span>
+        </h1>
+      </div>
 
+      <!-- Seção de Medicamentos em Uso -->
+      <div class="medicamentos-adicionados">
+        <h2 class="medicamentos-titulo">💊 Seus Medicamentos</h2>
         <div class="medicamento-data">
-            <!--Via javaScript-->
+          <!-- Dashboard com histórico, adesão e medicamentos não tomados será renderizado aqui -->
+          <!-- Inclui: histórico de medicamentos, doses não tomadas, adesão geral -->
         </div>
+      </div>
 
-        <div class="proximos-medicamentos">
-            <!--Via javaScript  -->
+      <!-- Seção de Próximos Medicamentos a Tomar -->
+      <div class="proximos-medicamentos-container" style="margin-top: 30px">
+        <h2 class="proximos-titulo" style="margin-bottom: 20px">
+          ⏰ Próximos Medicamentos
+        </h2>
+        <div class="proximos-medicamentos" style="display: none">
+          <!-- Lista de próximos medicamentos com horários e doses será renderizada aqui -->
         </div>
+      </div>
     </main>
 
-
-
-
     <footer>
-      <p>&copy; 2024 Hora Certa. Todos os direitos reservados.</p>
+      <p>&copy; 2026 Hora Certa. Todos os direitos reservados.</p>
     </footer>
-    
-</body>
+  </body>
 </html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/pagesCreateLogins.css" />
+    <title>Login Clínica</title>
+  </head>
+  <body>
+    <main class="container">
+      <section class="container-image">
+        <div class="logo-image">
+          <img src="../img/icon_convertido.svg" alt="Logo Hora Certa" />
+        </div>
+        <h1>Hora Certa!</h1>
+      </section>
+      <section class="container-form">
+        <h1>Login Clínica</h1>
+
+        <label for="email-clinica">Email:</label>
+        <input
+          type="email"
+          id="email-clinica"
+          name="email-clinica"
+          placeholder="Digite seu email"
+          required
+        />
+
+        <label for="senha-clinica">Senha:</label>
+        <input
+          type="password"
+          id="senha-clinica"
+          name="senha-clinica"
+          placeholder="Digite sua senha"
+          required
+        />
+
+        <button class="btnLogins btnEntrar-Clinicas" type="button">
+          Entrar
+        </button>
+
+        <p style="text-align: center; margin-top: 20px">
+          Não tem conta?
+          <a
+            href="pageCadastroClinicas.html"
+            style="color: #007bff; text-decoration: none"
+            >Criar conta aqui</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <script>
+      document
+        .querySelector(".btnEntrar-Clinicas")
+        .addEventListener("click", async function () {
+          const email = document.getElementById("email-clinica").value.trim();
+          const senha = document.getElementById("senha-clinica").value.trim();
+
+          if (!email || !senha) {
+            alert("Por favor, preencha todos os campos");
+            return;
+          }
+
+          try {
+            // Buscar todas as clínicas e validar credenciais
+            const response = await fetch("http://localhost:8080/api/clinicas", {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (response.ok) {
+              const clinicas = await response.json();
+
+              // Procurar pela clínica com email e senha corretos
+              const clinicaLogada = clinicas.find(
+                (clinica) => clinica.email === email && clinica.senha === senha,
+              );
+
+              if (clinicaLogada) {
+                // Salvar informações no localStorage
+                localStorage.setItem("clinicaId", clinicaLogada.id);
+                localStorage.setItem("clinicaNome", clinicaLogada.nome);
+                localStorage.setItem("clinicaEmail", clinicaLogada.email);
+                localStorage.setItem("isClinicaLogada", "true");
+
+                alert("Login realizado com sucesso!");
+                window.location.href = "./pageDashboardClinicas.html";
+              } else {
+                alert("Email ou senha incorretos");
+              }
+            } else {
+              alert("Erro ao fazer login. Tente novamente.");
+            }
+          } catch (error) {
+            console.error("Erro:", error);
+            alert("Erro na requisição: " + error.message);
+          }
+        });
+    </script>
+  </body>
+</html>

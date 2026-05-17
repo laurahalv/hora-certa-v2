@@ -1,53 +1,52 @@
 // ===== DADOS DOS MÉDICOS =====
-const medicos = [
-  {
-    id: 1,
-    nome: "Dr. Marcelo Rossi",
-    especialidade: "Cardiologia",
-    email: "Marcelo.Rossi@Horacerta.com",
-    telefone: "(11) 98121-2112",
-    crm: "CRM/SP 125635",
-    cadastro: "14/01/2024",
-    status: "Ativo",
-    pacientes: 45,
-    adesaoMedia: 89
-  },
-  {
-    id: 2,
-    nome: "Dr. Bruno Lins",
-    especialidade: "Endocrinologia",
-    email: "BrunoLins@Horacerta.com",
-    telefone: "(11) 98232-3233",
-    crm: "CRM/RJ 654321",
-    cadastro: "19/02/2024",
-    status: "Ativo",
-    pacientes: 38,
-    adesaoMedia: 88
-  },
-  {
-    id: 3,
-    nome: "Dra. Rafaelly Abreu",
-    especialidade: "Neurologia",
-    email: "Rafaelly.Abreu@Horacerta.com",
-    telefone: "(11) 98343-4355",
-    crm: "CRM/SP 924536",
-    cadastro: "09/03/2024",
-    status: "Ativo",
-    pacientes: 32,
-    adesaoMedia: 76
-  },
-  {
-    id: 4,
-    nome: "Dr. Igor Dantas",
-    especialidade: "Psiquiatria",
-    email: "Igor.Dantas@Horacerta.com",
-    telefone: "(11) 98565-6566",
-    crm: "CRM/SP 245896",
-    cadastro: "04/04/2024",
-    status: "Ativo",
-    pacientes: 28,
-    adesaoMedia: 94
+let medicos = [];
+const CLINICA_ID = localStorage.getItem("clinicaId");
+
+// ===== CARREGAR MÉDICOS DA CLÍNICA =====
+document.addEventListener("DOMContentLoaded", function () {
+  carregarMedicos();
+  inicializarEventos();
+});
+
+function inicializarEventos() {
+  const btnAdicionarMedico = document.querySelector(".addMedico .btn");
+  if (btnAdicionarMedico) {
+    btnAdicionarMedico.addEventListener("click", abrirModalMedico);
   }
+}
+
+function carregarMedicos() {
+  const clinicaId = localStorage.getItem("clinicaId");
+
+  if (!clinicaId) {
+    console.error("Clínica não identificada");
+    return;
+  }
+
+  fetch(`http://localhost:8080/api/medicos/clinica/${clinicaId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      medicos = data.map(medico => ({
+        id: medico.id,
+        nome: medico.nome,
+        especialidade: medico.especialidade,
+        email: medico.email,
+        crm: medico.crm,
+        status: "Ativo",
+        pacientes: 0, // TODO: implementar contagem de pacientes por médico
+        adesaoMedia: 0 // TODO: implementar cálculo de adesão média
+      }));
+      renderizarMedicos(medicos);
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar médicos:", error);
+    });
+}
 ];
 
 // ===== PACIENTES POR MÉDICO =====
@@ -322,7 +321,8 @@ async function cadastrarMedico() {
     especialidade: document.getElementById("medEspecialidade").value.trim(),
     crm:           document.getElementById("medCrm").value.trim(),
     email:         document.getElementById("medEmail").value.trim(),
-    telefone:      document.getElementById("medTelefone").value.trim()
+    telefone:      document.getElementById("medTelefone").value.trim(),
+    clinicaId:     Number(CLINICA_ID)
   };
 
   if (!dados.nome || !dados.especialidade || !dados.crm || !dados.email) {
@@ -331,28 +331,22 @@ async function cadastrarMedico() {
   }
 
   try {
-    const response = await fetch("/api/medicos", {
+    const response = await fetch("http://localhost:8080/api/medicos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados)
     });
 
     if (response.ok) {
+      alert("Médico cadastrado com sucesso!");
       fecharModalMedico();
-      renderizarMedicos(medicos);
+      await carregarMedicos(); // Recarrega a lista de médicos
     } else {
-      alert("Erro ao cadastrar médico.");
+      const errorData = await response.json().catch(() => ({}));
+      alert("Erro ao cadastrar médico: " + (errorData.message || "Tente novamente."));
     }
   } catch (err) {
-    console.error("Erro:", err);
+    console.error("Erro na requisição:", err);
+    alert("Falha na comunicação com o servidor.");
   }
-}
-
-
-// ===== INICIALIZA =====
-renderizarMedicos(medicos);
-
-const btnAdicionarMedico = document.querySelector(".addMedico .btn");
-if (btnAdicionarMedico) {
-  btnAdicionarMedico.addEventListener("click", abrirModalMedico);
 }

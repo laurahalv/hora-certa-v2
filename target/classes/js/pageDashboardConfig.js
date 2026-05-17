@@ -1,70 +1,134 @@
-const formularioCnpj = document.querySelector('.form-cnpj');
-const formularioPerfil = document.querySelector('.form-perfil');
-const formularioConfig = document.querySelector('.form-config');
+const formularioCnpj = document.querySelector(".form-cnpj");
+const formularioPerfil = document.querySelector(".form-perfil");
+const formularioSeguranca = document.querySelector(".form-seguranca");
 
-async function enviarDados(url, dados) {
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dados)
-        });
+// ===== CARREGAR DADOS DA CLÍNICA =====
+document.addEventListener("DOMContentLoaded", function () {
+  carregarDadosClinica();
+});
 
-        if (!response.ok) {
-            throw new Error('Erro na requisição');
-        }
+function carregarDadosClinica() {
+  const clinicaId = localStorage.getItem("clinicaId");
 
-        const resultado = await response.json();
+  if (!clinicaId) {
+    console.error("Clínica não identificada");
+    return;
+  }
 
-        console.log('Sucesso:', resultado);
+  fetch(`http://localhost:8080/api/clinicas/${clinicaId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Preencher formulário de configurações da clínica
+      formularioCnpj.querySelector("#nome").value = data.nome || "";
+      formularioCnpj.querySelector("#cnpj").value = data.cnpj || "";
+      formularioCnpj.querySelector("#endereco").value = data.endereco || "";
 
-    } catch(error){
-        console.error(error);
-    }
+      // Preencher formulário de perfil
+      formularioPerfil.querySelector("#nome").value = data.nome || "";
+      formularioPerfil.querySelector("#email").value = data.email || "";
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar dados da clínica:", error);
+    });
 }
 
-formularioCnpj.addEventListener('submit', async (event)=>{
+// ===== ENVIAR DADOS =====
+async function enviarDados(url, dados, metodo = "POST") {
+  try {
+    const response = await fetch(url, {
+      method: metodo,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
+    });
 
-    event.preventDefault();
+    if (!response.ok) {
+      throw new Error("Erro na requisição: " + response.status);
+    }
 
-    const dadosEmpresa = {
-        nome: formularioCnpj.querySelector('#nome').value,
-        cnpj: formularioCnpj.querySelector('#cnpj').value,
-        endereco: formularioCnpj.querySelector('#endereco').value
-    };
+    // Evita quebra se o endpoint retornar 204 No Content
+    const resposta =
+      response.status !== 204 ? await response.json().catch(() => ({})) : {};
+    console.log("Resposta do servidor:", resposta);
+    alert("Dados salvos com sucesso!");
+    return true;
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao salvar dados: " + error.message);
+    return false;
+  }
+}
 
-    await enviarDados('/api/empresas', dadosEmpresa);
+// ===== FORMULÁRIO CNPJ =====
+formularioCnpj.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
+  const clinicaId = localStorage.getItem("clinicaId");
+
+  const dadosEmpresa = {
+    nome: formularioCnpj.querySelector("#nome").value,
+    cnpj: formularioCnpj.querySelector("#cnpj").value,
+    endereco: formularioCnpj.querySelector("#endereco").value,
+  };
+
+  await enviarDados(
+    `http://localhost:8080/api/clinicas/${clinicaId}`,
+    dadosEmpresa,
+    "PATCH",
+  );
 });
 
+// ===== FORMULÁRIO PERFIL =====
+formularioPerfil.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-formularioPerfil.addEventListener('submit', async (event)=>{
+  const clinicaId = localStorage.getItem("clinicaId");
 
-    event.preventDefault();
+  const dadosPerfil = {
+    nome: formularioPerfil.querySelector("#nome").value,
+    email: formularioPerfil.querySelector("#email").value,
+  };
 
-    const dadosPerfil = {
-        nome: formularioPerfil.querySelector('#nome').value,
-        email: formularioPerfil.querySelector('#email').value,
-        telefone: formularioPerfil.querySelector('#telefone').value
-    };
-
-    await enviarDados('/api/perfil', dadosPerfil);
-
+  await enviarDados(
+    `http://localhost:8080/api/clinicas/${clinicaId}`,
+    dadosPerfil,
+    "PATCH",
+  );
 });
 
+// ===== FORMULÁRIO SEGURANÇA =====
+formularioSeguranca.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-formularioConfig.addEventListener('submit', async (event)=>{
+  const novaSenha = formularioSeguranca.querySelector("#nova-senha").value;
+  const confirmarSenha =
+    formularioSeguranca.querySelector("#confirmar-senha").value;
 
-    event.preventDefault();
+  if (novaSenha !== confirmarSenha) {
+    alert("As senhas não correspondem");
+    return;
+  }
 
-    const dadosConfig = {
-        senhaAtual: formularioConfig.querySelector('#senha-atual').value,
-        novaSenha: formularioConfig.querySelector('#nova-senha').value,
-        confirmarSenha: formularioConfig.querySelector('#confirmar-senha').value
-    };
+  const clinicaId = localStorage.getItem("clinicaId");
 
-    await enviarDados('/api/configuracao', dadosConfig);
+  const dadosSenha = {
+    senha: novaSenha,
+  };
 
+  await enviarDados(
+    `http://localhost:8080/api/clinicas/${clinicaId}`,
+    dadosSenha,
+    "PATCH",
+  );
+
+  // Limpar campos
+  formularioSeguranca.querySelector("#senha-atual").value = "";
+  formularioSeguranca.querySelector("#nova-senha").value = "";
+  formularioSeguranca.querySelector("#confirmar-senha").value = "";
 });

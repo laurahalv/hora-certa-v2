@@ -17,5 +17,8 @@ public class MedicoDTO {
     private Long clinicaId;
     private String clinicaNome;
     private String role;
+
+    public MedicoDTO(Long id, String nome, Especialidade especialidade, String cpf, String email, String telefone, String endereco) {
+    }
 }
 

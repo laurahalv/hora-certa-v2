@@ -1,26 +1,53 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/pagesCreateLogins.css">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/pagesCreateLogins.css" />
     <title>Bem Vindo!</title>
-</head>
-<body>
+  </head>
+  <body>
     <main class="container">
-        <section class="container-image">
-            <div class="logo-image">
-                <img src="./img/icon_convertido.svg" alt="Logo Hora Certa" />
-            </div>
-            <h1>Hora Certa!</h1>
-        </section>
-        <section class="container-form">
-            <h1>Bem vindo!</h1>
-            <button class="btnLogins btnEntrar-Clinicas">Entrar como Clínica</button>
-            <button class="btnLogins btnEntrar-Medico">Entrar como Médico</button>
-            <button class="btnLogins btnEntrar-Paciente">Entrar como Paciente</button>
-        </section>
+      <section class="container-image">
+        <div class="logo-image">
+          <img src="./img/icon_convertido.svg" alt="Logo Hora Certa" />
+        </div>
+        <h1>Hora Certa!</h1>
+      </section>
+      <section class="container-form">
+        <h1>Bem vindo!</h1>
+        <button class="btnLogins btnEntrar-Clinicas">
+          Entrar como Clínica
+        </button>
+        <button class="btnLogins btnEntrar-Medico">Entrar como Médico</button>
+        <button class="btnLogins btnEntrar-Paciente">
+          Entrar como Paciente
+        </button>
+      </section>
     </main>
-    
-</body>
+
+    <script>
+      document
+        .querySelector(".btnEntrar-Clinicas")
+        .addEventListener("click", () => {
+          window.location.href = "./html/pageLoginClinica.html";
+        });
+      document
+        .querySelector(".btnEntrar-Medico")
+        .addEventListener("click", () => {
+          window.location.href = "./html/pageLoginMedico.html";
+        });
+      document
+        .querySelector(".btnEntrar-Paciente")
+        .addEventListener("click", () => {
+          window.location.href = "./html/pageLoginPaciente.html";
+        });
+    </script>
+  </body>
+</html>
+        .addEventListener("click", () => {
+          window.location.href = "./html/pageLoginClinica.html";
+        });
+    </script>
+  </body>
 </html>

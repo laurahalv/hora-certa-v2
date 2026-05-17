@@ -41,39 +41,51 @@
     </main>
 
     <script>
-      document
+            document
         .querySelector(".btnLogins")
         .addEventListener("click", async function () {
           const email = document.getElementById("email-paciente").value.trim();
           const senha = document.getElementById("senha-paciente").value.trim();
 
           if (!email || !senha) {
-            alert("Por favor, preencha todos os campos obrigatórios");
+            alert("Por favor, preencha todos os campos");
             return;
           }
 
           try {
-            const response = await fetch("http://localhost:8080/api/pacientes/login", {
-              method: "POST",
+            const response = await fetch("http://localhost:8080/api/pacientes", {
+              method: "GET",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({
-                email: email,
-                senha: senha,
-              }),
             });
 
             if (response.ok) {
-              alert("Login realizado com sucesso!");
-              window.location.href = "/src/main/resources/static/html/pagePacientesHome.html";
+              const clinicas = await response.json();
+
+              // Procurar pelo paciente com email e senha corretos
+              const pacienteLogado = clinicas.find(
+                (paciente) => paciente.email === email && paciente.senha === senha,
+              );
+
+              if (pacienteLogado) {
+                // Salvar informações no localStorage
+                localStorage.setItem("pacienteId", pacienteLogado.id);
+                localStorage.setItem("pacienteNome", pacienteLogado.nome);
+                localStorage.setItem("pacienteEmail", pacienteLogado.email);
+                localStorage.setItem("isPacienteLogado", "true");
+
+                alert("Login realizado com sucesso!");
+                window.location.href = "./pagePacientesHome.html";
+              } else {
+                alert("Email ou senha incorretos");
+              }
             } else {
-              const error = await response.json();
-              alert(error.message || "Erro ao realizar login");
+              alert("Erro ao fazer login. Tente novamente.");
             }
           } catch (error) {
-            console.error("Erro ao realizar login:", error);
-            alert("Ocorreu um erro ao tentar realizar o login");
+            console.error("Erro:", error);
+            alert("Erro na requisição: " + error.message);
           }
         });
     </script>

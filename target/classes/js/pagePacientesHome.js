@@ -1,37 +1,59 @@
-// ===== DADOS (substituir por fetch quando tiver API) =====
-const dashboardData = {
-  adesaoGeral: 95,
-  medicamentosTomadosHoje: 2,
-  totalMedicamentosHoje: 3,
-  medicoResponsavel: "Dra. Rafaelly Abreu",
-  proximosMedicamentos: 2,
+// =============================================
+// ===== DADOS DO PACIENTE (LOCALSTORAGE) ======
+// =============================================
+const LOGGED_PACIENTE_ID = localStorage.getItem("pacienteId");
+const LOGGED_PACIENTE_NOME = localStorage.getItem("pacienteNome");
 
-  historico: [
-    { medicamento: "Sertralina",  dose: "50mg",  data: "21/03/2026", horario: "09:00", status: "Não Tomado" },
-    { medicamento: "Clonazepam", dose: "0,5mg", data: "21/03/2026", horario: "17:00", status: "Tomado no horário" },
-    { medicamento: "Clonazepam", dose: "0,5mg", data: "21/03/2026", horario: "09:00", status: "Tomado com atraso" }
-  ],
+// ===== ESTADO GLOBAL DA SPA ==================
+let pacientesAtuais = [];
+let proximosMedicamentos = [];
+let proximosVisiveis = false;
 
-  naoTomados: [
-    { nome: "Sertralina 50mg", horario: "20:00", data: "17/04/2026" }
-  ]
-};
+// ===== CARREGAMENTO INICIAL =====
+document.addEventListener("DOMContentLoaded", function () {
+  // Injeta o nome do paciente no título fixo do HTML
+  const txtPacienteNome = document.getElementById("loggedPacienteNome");
+  if (txtPacienteNome) {
+    txtPacienteNome.textContent = LOGGED_PACIENTE_NOME || "Paciente";
+  }
 
+  if (!LOGGED_PACIENTE_ID) {
+    console.error("ID do paciente não encontrado no localStorage.");
+    return;
+  }
+
+  carregarDashboard();
+  carregarProximosMedicamentosData();
+});
 
 // ===== CONFIG DE STATUS =====
 function configStatusMed(status) {
   switch (status) {
     case "Não Tomado":
-      return { cor: "#ef4444", bg: "#fee2e2" };
+    case "NAO_TOMADO":
+      return { statusTexto: "Não Tomado", cor: "#ef4444", bg: "#fee2e2" };
     case "Tomado no horário":
-      return { cor: "#16a34a", bg: "#dcfce7" };
+    case "NO_HORARIO":
+      return {
+        statusTexto: "Tomado no horário",
+        cor: "#16a34a",
+        bg: "#dcfce7",
+      };
     case "Tomado com atraso":
-      return { cor: "#d97706", bg: "#fef9c3" };
+    case "COM_ATRASO":
+      return {
+        statusTexto: "Tomado com atraso",
+        cor: "#d97706",
+        bg: "#fef9c3",
+      };
     default:
-      return { cor: "#6b7280", bg: "#f3f4f6" };
+      return {
+        statusTexto: status || "Pendente",
+        cor: "#6b7280",
+        bg: "#f3f4f6",
+      };
   }
 }
-
 
 // ===== ÍCONES SVG =====
 function iconeDoc() {
@@ -50,39 +72,71 @@ function iconeAlerta() {
   return `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
 }
 
+async function carregarDashboard() {
+  try {
+    // Ajustado para bater no controller de pacientes
+    const response = await fetch(
+      `http://localhost:8080/api/pacientes/dashboard/${LOGGED_PACIENTE_ID}`,
+    );
+    if (!response.ok) throw new Error("Erro ao buscar dados do dashboard");
 
-// ===== RENDERIZA TUDO =====
+    const dados = await response.json();
+    renderizarDashboard(dados);
+  } catch (err) {
+    console.error("Erro ao carregar dashboard da API:", err);
+    const container = document.querySelector(".medicamento-data");
+    if (container)
+      container.innerHTML = `<p class="erro-api">Não foi possível carregar os dados do painel.</p>`;
+  }
+}
+
+// ===== BUSCA DA API: PRÓXIMOS MEDICAMENTOS =====
+async function carregarProximosMedicamentosData() {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/pacientes/${LOGGED_PACIENTE_ID}/proximos`,
+    );
+    if (response.ok) {
+      proximosMedicamentos = await response.json();
+      // Atualiza o contador de pendências em tempo real na tela
+      const contadorEl = document.querySelector(".dash-prox-numero");
+      if (contadorEl) contadorEl.textContent = proximosMedicamentos.length;
+    }
+  } catch (err) {
+    console.error("Erro ao carregar próximos medicamentos:", err);
+  }
+}
+
+// ===== RENDERIZA DASHBOARD =====
 function renderizarDashboard(dados) {
   const container = document.querySelector(".medicamento-data");
   if (!container) return;
 
+  // Proteções contra listas nulas vindas do Java
+  const listaHistorico = dados.historico || [];
+  const listaNaoTomados = dados.naoTomados || [];
+
   container.innerHTML = `
-
-    <!-- ===== LINHA 1: 3 CARDS DE RESUMO ===== -->
     <div class="dash-grid-3">
-
       <div class="dash-card">
         <div class="dash-card-label">Adesão Geral</div>
-        <div class="dash-adesao-valor">${dados.adesaoGeral}%</div>
-        <div class="dash-card-sub">${dados.medicamentosTomadosHoje} de ${dados.totalMedicamentosHoje} medicamentos tomados hoje</div>
+        <div class="dash-adesao-valor">${dados.adesaoGeral || 0}%</div>
+        <div class="dash-card-sub">${dados.medicamentosTomadosHoje || 0} de ${dados.totalMedicamentosHoje || 0} tomados hoje</div>
       </div>
 
       <div class="dash-card dash-card-center">
         <div class="dash-card-label">Próximos Medicamentos</div>
-        <div class="dash-prox-numero">${dados.proximosMedicamentos}</div>
+        <div class="dash-prox-numero">${proximosMedicamentos.length || dados.proximosMedicamentos || 0}</div>
         <a class="dash-ver-todos" href="#" onclick="event.preventDefault(); toggleProximosMedicamentos()">Ver todos →</a>
       </div>
 
       <div class="dash-card">
-        <div class="dash-card-label">Médicos responsável</div>
-        <div class="dash-medico-nome">${dados.medicoResponsavel}</div>
+        <div class="dash-card-label">Médico Responsável</div>
+        <div class="dash-medico-nome">${dados.medicoResponsavel || "Não atribuído"}</div>
       </div>
-
     </div>
 
-    <!-- ===== LINHA 2: ATALHOS ===== -->
     <div class="dash-grid-2">
-
       <div class="dash-atalho" onclick="abrirObservacoes()">
         <div class="dash-atalho-icone dash-icone-azul">${iconeDoc()}</div>
         <div>
@@ -98,13 +152,9 @@ function renderizarDashboard(dados) {
           <div class="dash-atalho-sub">Defina os horários de seus medicamentos</div>
         </div>
       </div>
-
     </div>
 
-    <!-- ===== LINHA 3: HISTÓRICO + NÃO TOMADOS ===== -->
     <div class="dash-grid-2">
-
-      <!-- Histórico -->
       <div class="dash-card">
         <div class="dash-secao-titulo">
           ${iconeHistorico()}
@@ -121,111 +171,86 @@ function renderizarDashboard(dados) {
             </tr>
           </thead>
           <tbody>
-            ${dados.historico.map(h => {
-              const { cor, bg } = configStatusMed(h.status);
-              return `
+            ${listaHistorico.length === 0 ? '<tr><td colspan="5" style="color:#9ca3af; text-align:center;">Nenhum registro no histórico.</td></tr>' : ""}
+            ${listaHistorico
+              .map((h) => {
+                const { statusTexto, cor, bg } = configStatusMed(h.status);
+                return `
                 <tr>
-                  <td><strong>${h.medicamento}</strong></td>
-                  <td>${h.dose}</td>
+                  <td><strong>${h.medicamento || h.nome}</strong></td>
+                  <td>${h.dose || "—"}</td>
                   <td>${h.data}</td>
                   <td>${h.horario}</td>
                   <td>
                     <span class="dash-badge" style="color:${cor};background:${bg};">
-                      ${h.status}
+                      ${statusTexto}
                     </span>
                   </td>
                 </tr>
               `;
-            }).join("")}
+              })
+              .join("")}
           </tbody>
         </table>
       </div>
 
-      <!-- Não tomados -->
       <div class="dash-card">
         <div class="dash-secao-titulo">
           ${iconeAlerta()}
-          Medicamentos não tomados (${dados.naoTomados.length})
+          Medicamentos não tomados (${listaNaoTomados.length})
         </div>
         <div class="dash-nao-tomados-lista">
-          ${dados.naoTomados.map(m => `
+          ${listaNaoTomados.length === 0 ? '<p style="color:#9ca3af;font-size:14px;padding:20px 0;">Nenhum alerta de dose perdida.</p>' : ""}
+          ${listaNaoTomados
+            .map(
+              (m) => `
             <div class="dash-nao-tomado-item">
               <div>
-                <div class="dash-nao-tomado-nome">${m.nome}</div>
-                <div class="dash-nao-tomado-info">Horário: ${m.horario}</div>
+                <div class="dash-nao-tomado-nome">${m.medicamento || m.nome} ${m.dose || ""}</div>
+                <div class="dash-nao-tomado-info">Horário planejado: ${m.horario}</div>
                 <div class="dash-nao-tomado-info">Data: ${m.data}</div>
               </div>
               <div class="dash-nao-tomado-acoes">
-                <button class="dash-btn-atraso" onclick="marcarAtraso('${m.nome}')">
-                  Marcar como tomado com atraso
+                <button class="dash-btn-atraso" onclick="marcarDosePerdida('${m.id}', 'COM_ATRASO')">
+                  Tomado com atraso
                 </button>
-                <button class="dash-btn-tomado" onclick="marcarTomado('${m.nome}')">
-                  Marcar como tomado
+                <button class="dash-btn-tomado" onclick="marcarDosePerdida('${m.id}', 'NO_HORARIO')">
+                  Tomado
                 </button>
               </div>
             </div>
-          `).join("")}
+          `,
+            )
+            .join("")}
         </div>
       </div>
-
     </div>
   `;
 }
 
-
-// ===== AÇÕES DOS BOTÕES =====
-function marcarTomado(nome) {
-  console.log("Marcar como tomado:", nome);
-  // fetch POST /api/medicamentos/marcar-tomado
-}
-
-function marcarAtraso(nome) {
-  console.log("Marcar com atraso:", nome);
-  // fetch POST /api/medicamentos/marcar-atraso
-}
-
-function abrirObservacoes() {
-  console.log("Abrir observações");
-  // Redireciona ou abre modal
-}
-
-function abrirAgendamento() {
-  console.log("Abrir agendamento");
-  // Redireciona ou abre modal
-}
-
-
-// ===== BUSCA DA API =====
-async function carregarDashboard() {
+// ===== REQUISIÇÃO (PATCH): MARCAR DOSE QUE ESTAVA PERDIDA =====
+async function marcarDosePerdida(id, statusFim) {
   try {
-    const response = await fetch("/api/dashboard/paciente");
-    const dados = await response.json();
-    renderizarDashboard(dados);
+    // Usa o endpoint PATCH para registrar o consumo da dose não tomada
+    const endpoint =
+      statusFim === "COM_ATRASO" || statusFim === "NO_HORARIO"
+        ? `http://localhost:8080/api/registro-consumo/${id}/registrar`
+        : `http://localhost:8080/api/registro-consumo/${id}/desnecessario`;
+
+    const response = await fetch(endpoint, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      alert("Status atualizado com sucesso!");
+      await carregarDashboard();
+      await carregarProximosMedicamentosData();
+    }
   } catch (err) {
-    // Usa dados locais enquanto não tem API
-    renderizarDashboard(dashboardData);
+    console.error("Erro ao atualizar dose perdida:", err);
   }
 }
-
-
-// ===== DADOS PRÓXIMOS MEDICAMENTOS =====
-const proximosMedicamentos = [
-  {
-    id: 1,
-    nome: "Metformina",
-    dose: "850mg",
-    frequencia: "2x ao dia",
-    horario: "12:00"
-  },
-  {
-    id: 2,
-    nome: "Sinvastatina",
-    dose: "20mg",
-    frequencia: "1x ao dia",
-    horario: "20:00"
-  }
-];
-
 
 // ===== RENDERIZA PRÓXIMOS MEDICAMENTOS =====
 function renderizarProximosMedicamentos() {
@@ -234,15 +259,18 @@ function renderizarProximosMedicamentos() {
 
   container.innerHTML = `
     <div class="prox-header">
-      <h2 class="prox-titulo">Proximos Medicamentos</h2>
+      <h2 class="prox-titulo">Próximos Medicamentos</h2>
       <button class="btn-registrar-dose" onclick="abrirRegistrarDose()">
-        + Registrar Dose
+        + Registrar Outra Dose
       </button>
     </div>
 
     <div class="prox-lista">
-      ${proximosMedicamentos.map(med => `
-        <div class="prox-card" id="prox-card-${med.id}">
+      ${proximosMedicamentos.length === 0 ? '<p style="color:#9ca3af;font-size:14px;padding:20px 0;">Nenhum medicamento agendado para as próximas horas.</p>' : ""}
+      ${proximosMedicamentos
+        .map(
+          (med) => `
+        <div class="prox-card" id="prox-card-${med.id}" data-prescricao="${med.id}">
           <div class="prox-card-esquerda">
             <div class="prox-icone">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -251,9 +279,9 @@ function renderizarProximosMedicamentos() {
               </svg>
             </div>
             <div class="prox-info">
-              <div class="prox-nome">${med.nome}</div>
+              <div class="prox-nome">${med.nome || med.medicamento}</div>
               <div class="prox-dose">${med.dose}</div>
-              <div class="prox-frequencia">${med.frequencia}</div>
+              <div class="prox-frequencia">${med.frequencia || "—"}</div>
             </div>
           </div>
           <div class="prox-card-direita">
@@ -263,38 +291,72 @@ function renderizarProximosMedicamentos() {
             </button>
           </div>
         </div>
-      `).join("")}
+      `,
+        )
+        .join("")}
     </div>
   `;
-
-  // Scroll suave até a seção
   container.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// ===== TOGGLE PRÓXIMOS MEDICAMENTOS =====
-let proximosVisiveis = false;
+// ===== REQUISIÇÃO (POST): MARCAR COMO TOMADO AGORA =====
+async function marcarComoTomado(id) {
+  const card = document.getElementById(`prox-card-${id}`);
+  if (!card) return;
 
+  try {
+    // Busca a prescrição para obter o prescricaoId (que é armazenado no atributo data-prescricao)
+    const prescricaoId = card.getAttribute("data-prescricao") || id;
+    const agora = new Date();
+    const dataHoraAgora = agora.toISOString();
+
+    const response = await fetch(`http://localhost:8080/api/registro-consumo`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        dataHoraPrevista: dataHoraAgora,
+        dataHoraConsumida: dataHoraAgora,
+        prescricaoId: Number(prescricaoId),
+        pacienteId: Number(LOGGED_PACIENTE_ID),
+        observacoes: "",
+      }),
+    });
+
+    if (response.ok) {
+      const btn = card.querySelector(".btn-marcar-tomado");
+      btn.textContent = "✓ Tomado!";
+      btn.style.background = "#16a34a";
+      btn.disabled = true;
+      card.style.opacity = "0.5";
+
+      setTimeout(async () => {
+        card.style.display = "none";
+        await carregarDashboard();
+        await carregarProximosMedicamentosData();
+        if (proximosVisiveis) renderizarProximosMedicamentos();
+      }, 600);
+    }
+  } catch (err) {
+    console.error("Erro ao registrar tomada do medicamento:", err);
+  }
+}
+
+// ===== TOGGLE VISIBILIDADE ABAS =====
 function toggleProximosMedicamentos() {
   const container = document.querySelector(".proximos-medicamentos");
   if (!container) return;
 
   if (proximosVisiveis) {
-    // ===== ESCONDE =====
     container.style.opacity = "0";
     container.style.transform = "translateY(-8px)";
     setTimeout(() => {
       container.style.display = "none";
       container.innerHTML = "";
     }, 250);
-
     proximosVisiveis = false;
-
-    // Muda o link de volta
     const link = document.querySelector(".dash-ver-todos");
     if (link) link.textContent = "Ver todos →";
-
   } else {
-    // ===== MOSTRA =====
     container.style.display = "block";
     container.style.opacity = "0";
     container.style.transform = "translateY(-8px)";
@@ -306,105 +368,53 @@ function toggleProximosMedicamentos() {
       container.style.opacity = "1";
       container.style.transform = "translateY(0)";
     });
-
     proximosVisiveis = true;
-
-    // Muda o link para "Fechar"
     const link = document.querySelector(".dash-ver-todos");
     if (link) link.textContent = "Fechar ×";
   }
 }
 
-
-// ===== MARCAR COMO TOMADO =====
-function marcarComoTomado(id) {
-  const card = document.getElementById(`prox-card-${id}`);
-  if (!card) return;
-
-  // Feedback visual
-  const btn = card.querySelector(".btn-marcar-tomado");
-  btn.textContent = "✓ Tomado!";
-  btn.style.background = "#16a34a";
-  btn.disabled = true;
-
-  card.style.opacity = "0.5";
-  card.style.transition = "opacity 0.4s ease";
-
-  setTimeout(() => {
-    card.style.display = "none";
-
-    // Remove do array local
-    const idx = proximosMedicamentos.findIndex(m => m.id === id);
-    if (idx !== -1) proximosMedicamentos.splice(idx, 1);
-
-    // Atualiza contador no dashboard
-    const contadorEl = document.querySelector(".dash-prox-numero");
-    if (contadorEl) contadorEl.textContent = proximosMedicamentos.length;
-
-    // Se não sobrar nenhum
-    const lista = document.querySelector(".prox-lista");
-    if (lista && proximosMedicamentos.length === 0) {
-      lista.innerHTML = `<p style="color:#9ca3af;font-size:14px;padding:20px 0;">Nenhum medicamento pendente.</p>`;
-    }
-  }, 600);
-
-  // fetch POST /api/medicamentos/:id/tomar
-  console.log("Marcar como tomado:", id);
-}
-
-
-// ===== MODAL — REGISTRAR DOSE =====
-
+// ===== MODAL — REGISTRAR DOSE MANUAL =====
 function criarModalRegistrarDose() {
+  if (document.getElementById("modalRegistrarDose")) return;
   const modal = document.createElement("div");
   modal.id = "modalRegistrarDose";
   modal.innerHTML = `
     <div class="modal-overlay" onclick="fecharModalRegistrarDose()"></div>
     <div class="modal-box-dose">
-
       <h2>Marcar Medicamento</h2>
-
       <div class="modal-campo">
-        <label>Nome do Medicamento</label>
+        <label>Selecione o Medicamento</label>
         <select id="doseNome">
           <option value="">Selecione</option>
-          ${proximosMedicamentos.map(m => `
-            <option value="${m.id}">${m.nome} ${m.dose}</option>
-          `).join("")}
+          ${proximosMedicamentos.map((m) => `<option value="${m.id}">${m.nome || m.medicamento} (${m.dose})</option>`).join("")}
         </select>
       </div>
-
       <div class="modal-campo">
         <label>Quando o medicamento foi tomado?</label>
         <select id="doseQuando">
           <option value="">Selecione</option>
-          <option value="no_horario">No horário</option>
-          <option value="com_atraso">Com atraso</option>
-          <option value="nao_tomado">Não tomei</option>
+          <option value="NO_HORARIO">No horário</option>
+          <option value="COM_ATRASO">Com atraso</option>
+          <option value="NAO_TOMADO">Não tomei</option>
         </select>
       </div>
-
       <div class="modal-campo">
         <label>Dia</label>
         <input type="date" id="doseDia">
       </div>
-
       <div class="modal-campo">
         <label>Horário</label>
         <input type="time" id="doseHorario">
       </div>
-
       <div class="modal-campo">
         <label>Observações <span class="label-opcional">(opcional)</span></label>
-        <textarea id="doseObservacoes" rows="4"
-          placeholder="Registre como está se sentindo ou possiveis reações com esse medicamento"></textarea>
+        <textarea id="doseObservacoes" rows="4" placeholder="Como está se sentindo ou reações encontradas..."></textarea>
       </div>
-
       <div class="modal-dose-acoes">
         <button class="btn-dose-registrar" onclick="registrarDose()">Registrar</button>
         <button class="btn-dose-cancelar" onclick="fecharModalRegistrarDose()">Cancelar</button>
       </div>
-
     </div>
   `;
   document.body.appendChild(modal);
@@ -413,7 +423,8 @@ function criarModalRegistrarDose() {
 function abrirRegistrarDose() {
   criarModalRegistrarDose();
   requestAnimationFrame(() => {
-    document.getElementById("modalRegistrarDose").classList.add("ativo");
+    const modal = document.getElementById("modalRegistrarDose");
+    if (modal) modal.classList.add("ativo");
   });
 }
 
@@ -425,38 +436,59 @@ function fecharModalRegistrarDose() {
 }
 
 async function registrarDose() {
-  const dados = {
-    medicamento_id: document.getElementById("doseNome").value,
-    quando:         document.getElementById("doseQuando").value,
-    dia:            document.getElementById("doseDia").value,
-    horario:        document.getElementById("doseHorario").value,
-    observacoes:    document.getElementById("doseObservacoes").value.trim()
-  };
+  const prescricaoId = document.getElementById("doseNome").value;
+  const quando = document.getElementById("doseQuando").value;
+  const dia = document.getElementById("doseDia").value;
+  const horario = document.getElementById("doseHorario").value;
+  const observacoes = document.getElementById("doseObservacoes").value.trim();
 
-  if (!dados.medicamento_id || !dados.quando || !dados.dia || !dados.horario) {
+  if (!prescricaoId || !quando || !dia || !horario) {
     alert("Preencha todos os campos obrigatórios.");
     return;
   }
 
+  // Constrói a data e hora prevista a partir dos inputs
+  const dataHoraPrevista = new Date(`${dia}T${horario}:00`).toISOString();
+
+  // Se foi marcado "tomado no horário" ou "tomado com atraso", registra também a data/hora consumida
+  let dataHoraConsumida = null;
+  if (quando === "NO_HORARIO" || quando === "COM_ATRASO") {
+    dataHoraConsumida = new Date().toISOString(); // Data e hora atual
+  }
+
+  const dados = {
+    dataHoraPrevista: dataHoraPrevista,
+    dataHoraConsumida: dataHoraConsumida,
+    prescricaoId: Number(prescricaoId),
+    pacienteId: Number(LOGGED_PACIENTE_ID),
+    observacoes: observacoes,
+  };
+
   try {
-    const response = await fetch("/api/doses", {
+    const response = await fetch("http://localhost:8080/api/registro-consumo", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dados)
+      body: JSON.stringify(dados),
     });
 
     if (response.ok) {
+      alert("Dose registrada!");
       fecharModalRegistrarDose();
-      carregarDashboard(); // atualiza o dashboard
+      await carregarDashboard();
+      await carregarProximosMedicamentosData();
+      if (proximosVisiveis) renderizarProximosMedicamentos();
     } else {
       alert("Erro ao registrar dose.");
     }
   } catch (err) {
-    // Sem API ainda: fecha e dá feedback
-    fecharModalRegistrarDose();
-    console.log("Dose registrada localmente:", dados);
+    console.error("Erro na comunicação:", err);
   }
 }
 
-// ===== INICIA =====
-carregarDashboard();
+// ===== REDIRECIONAMENTOS DE ATALHOS =====
+function abrirObservacoes() {
+  window.location.href = "pagePacientesObs.html";
+}
+function abrirAgendamento() {
+  window.location.href = "pagePacientesConfig.html";
+}
