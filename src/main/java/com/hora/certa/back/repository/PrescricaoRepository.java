@@ -38,5 +38,9 @@ public interface PrescricaoRepository extends JpaRepository<Prescricao, Long> {
     // Buscar prescrições ativas de um paciente por data
     @Query("SELECT p FROM Prescricao p WHERE p.paciente.id = :pacienteId AND p.status = 'ATIVA' AND p.dataTermino > CURRENT_TIMESTAMP")
     List<Prescricao> findValidPrescriptionsByPaciente(@Param("pacienteId") Long pacienteId);
+
+    // Conta quantas prescrições estão ativas e válidas para o paciente
+    @Query("SELECT COUNT(p) FROM Prescricao p WHERE p.paciente.id = :pacienteId AND p.status = 'ATIVA' AND p.dataTermino > CURRENT_TIMESTAMP")
+    Integer countProximosMedicamentos(@Param("pacienteId") Long pacienteId);
 }
 

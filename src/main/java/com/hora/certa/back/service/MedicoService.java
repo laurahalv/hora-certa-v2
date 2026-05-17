@@ -1,15 +1,18 @@
 package com.hora.certa.back.service;
 
 import com.hora.certa.back.models.Clinica;
+import com.hora.certa.back.models.Paciente;
 import com.hora.certa.back.repository.ClinicaRepository;
 import com.hora.certa.back.dto.MedicoCreateDTO;
 import com.hora.certa.back.dto.MedicoDTO;
 import com.hora.certa.back.models.Medico;
 import com.hora.certa.back.repository.MedicoRepository;
+import com.hora.certa.back.repository.PacienteRepository;
 import com.hora.certa.back.util.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +23,9 @@ public class MedicoService {
 
     @Autowired
     private ClinicaRepository clinicaRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
 
     public MedicoDTO create(MedicoCreateDTO dto) {
         if (medicoRepository.existsByCrm(dto.getCrm())) {
@@ -74,6 +80,10 @@ public class MedicoService {
     public List<Medico> findAllByClinica(Long clinicaId) {
         List<Medico> medicos = medicoRepository.findByClinicaId(clinicaId);
         return medicos;
+    }
+    public List<Paciente> findPacientesByMedicoId(Long medicoId) {
+            List<Paciente> pacientes = pacienteRepository.findByMedicoId(medicoId);
+        return pacientes;
     }
 }
 

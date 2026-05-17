@@ -100,13 +100,21 @@
             });
 
             if (response.ok) {
+              const clinicaCriada = await response.json();
+
+              // Salvar informações da clínica no localStorage
+              localStorage.setItem("clinicaId", clinicaCriada.id);
+              localStorage.setItem("clinicaNome", clinicaCriada.nome);
+              localStorage.setItem("clinicaEmail", clinicaCriada.email);
+              localStorage.setItem("isClinicaLogada", "true");
+
               alert("Clínica criada com sucesso!");
               document.getElementById("nome-clinica").value = "";
               document.getElementById("endereco-clinica").value = "";
               document.getElementById("cnpj-clinica").value = "";
               document.getElementById("email-clinica").value = "";
               document.getElementById("senha-clinica").value = "";
-              window.location.href = "/src/main/resources/static/pageLogins.html";
+              window.location.href = "./pageDashboardClinicas.html";
             } else {
               let errorMessage = "Tente novamente";
               const contentType = response.headers.get("content-type");

@@ -28,4 +28,13 @@ public class User {
 
     @Column(name = "role", nullable = false)
     protected String role;
+
+    @Column(name = "cpf")
+    protected String cpf;
+
+    @Column(name = "telefone")
+    protected String telefone;
+
+    @Column(name = "endereco")
+    protected String endereco;
 }

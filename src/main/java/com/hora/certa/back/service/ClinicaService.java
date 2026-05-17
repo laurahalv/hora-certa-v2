@@ -34,13 +34,12 @@ public class ClinicaService {
         clinica.setEndereco(dto.getEndereco());
         clinica.setRole("CLINICA");
 
-        // Salva e já converte usando o construtor que criamos
         return new ClinicaDTO(clinicaRepository.save(clinica));
     }
 
     public ClinicaDTO findById(Long id) {
         return clinicaRepository.findById(id)
-                .map(ClinicaDTO::new) // Uso de Method Reference (limpo e elegante)
+                .map(ClinicaDTO::new)
                 .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
     }
 

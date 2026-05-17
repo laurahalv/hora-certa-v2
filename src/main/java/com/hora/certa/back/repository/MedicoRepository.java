@@ -1,12 +1,14 @@
 package com.hora.certa.back.repository;
 
-import com.hora.certa.back.enums.Especialidade;
-import com.hora.certa.back.models.Medico;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import java.util.List;
+
+import com.hora.certa.back.enums.Especialidade;
+import com.hora.certa.back.models.Medico;
 
 @Repository
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
@@ -23,6 +25,8 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     // Buscar médicos por clínica
     List<Medico> findByClinicaId(Long clinicaId);
 
+    long countByClinicaId(Long clinicaId);
+
     // Buscar médicos por especialidade e clínica
     @Query("SELECT m FROM Medico m WHERE m.especialidade = :especialidade AND m.clinica.id = :clinicaId")
     List<Medico> findByEspecialidadeAndClinica(@Param("especialidade") Especialidade especialidade, @Param("clinicaId") Long clinicaId);
@@ -33,4 +37,3 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     // Verificar se existe médico com email
     boolean existsByEmail(String email);
 }
-

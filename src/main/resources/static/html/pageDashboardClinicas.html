@@ -24,6 +24,19 @@
         <a href="pageDashboardMedicos.html" class="header-link">Médicos</a>
         <a href="pageDashboardConvites.html" class="header-link">Convites</a>
         <a href="pageDashboardConfig.html" class="header-link">Configurações</a>
+        <button
+          class="header-link"
+          id="btnLogout"
+          style="
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+            font-size: inherit;
+          "
+        >
+          Sair
+        </button>
       </div>
     </header>
     <main class="dashboard-container">
@@ -38,7 +51,7 @@
           <div class="card-data">
             <div class="card-agrupamento">
               <div class="card-value">
-                <p>6</p>
+                <p id="total-pacientes"></p>
               </div>
 
               <div class="card-image">
@@ -58,7 +71,7 @@
           <div class="card-data">
             <div class="card-agrupamento">
               <div class="card-value">
-                <p>4</p>
+                <p id="total-medicos"></p>
               </div>
 
               <div class="card-image">
@@ -78,7 +91,7 @@
           <div class="card-data">
             <div class="card-agrupamento">
               <div class="card-value">
-                <p>2</p>
+                <p id="total-convites"></p>
               </div>
 
               <div class="card-image">
@@ -96,9 +109,9 @@
         <div class="card">
           <h3>Adesão Media</h3>
           <div class="card-data">
-            <div class="card-agrupamento">  
+            <div class="card-agrupamento">
               <div class="card-value">
-                <p>87%</p>
+                <p id="total-adesao"></p>
               </div>
 
               <div class="card-image">
@@ -121,22 +134,25 @@
 
           <div class="cardNotificacoes PacientesdeBaixaAdesão">
             <h3>Pacientes de Baixa Adesão</h3>
-            <p class="content-cards-value">1 Paciente apresenta adesão abaixo de 40%</p>
+            <p class="content-cards-value">
+              1 Paciente apresenta adesão abaixo de 40%
+            </p>
             <button class="btn-notificacao">Ver Detalhes</button>
           </div>
 
           <div class="cardNotificacoes PróximasConsultas">
             <h3>Próximas Consultas</h3>
-            <p class="content-cards-value">1 Consulta agendada para os proximos 7 dias</p>  
+            <p class="content-cards-value">
+              1 Consulta agendada para os proximos 7 dias
+            </p>
             <button class="btn-notificacao">Ver Detalhes</button>
           </div>
 
           <div class="cardNotificacoes ConvitesPendentes">
             <h3>Convites Pendentes</h3>
-            <p class="content-cards-value">2 Convites  Aguardando resposta</p>
+            <p class="content-cards-value">2 Convites Aguardando resposta</p>
             <button class="btn-notificacao">Ver Detalhes</button>
           </div>
-
         </div>
 
         <div class="Adesao-Medico">
@@ -145,45 +161,41 @@
 
           <div class="cardAdesaoMedico">
             <h3>Dr. João Silva</h3>
-            <p class="medicoEspecialidade" >Cardiologista</p>
+            <p class="medicoEspecialidade">Cardiologista</p>
             <p class="content-loader-value">97%</p>
           </div>
 
           <div class="cardAdesaoMedico">
             <h3>Dr. João Silva</h3>
-            <p class="medicoEspecialidade" >Cardiologista</p>
+            <p class="medicoEspecialidade">Cardiologista</p>
             <p class="content-loader-value">97%</p>
           </div>
 
           <div class="cardAdesaoMedico">
             <h3>Dr. João Silva</h3>
-            <p class="medicoEspecialidade" >Cardiologista</p>
+            <p class="medicoEspecialidade">Cardiologista</p>
             <p class="content-loader-value">97%</p>
           </div>
 
           <div class="cardAdesaoMedico">
             <h3>Dr. João Silva</h3>
-            <p class="medicoEspecialidade" >Cardiologista</p>
+            <p class="medicoEspecialidade">Cardiologista</p>
             <p class="content-loader-value">97%</p>
           </div>
 
           <div class="cardAdesaoMedico">
             <h3>Dr. João Silva</h3>
-            <p class="medicoEspecialidade" >Cardiologista</p>
+            <p class="medicoEspecialidade">Cardiologista</p>
             <p class="content-loader-value">97%</p>
           </div>
 
           <div class="cardAdesaoMedico">
             <h3>Dr. João Silva</h3>
-            <p class="medicoEspecialidade" >Cardiologista</p>
+            <p class="medicoEspecialidade">Cardiologista</p>
             <p class="content-loader-value">97%</p>
-          </div>  
-          
-
+          </div>
         </div>
       </section>
-
-
     </main>
 
     <footer>
@@ -191,3 +203,5 @@
     </footer>
   </body>
 </html>
+
+<script src="../../js/dashboardClinicas.js"></script>
